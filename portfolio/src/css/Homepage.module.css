@@ -1,0 +1,35 @@
+.scrollContainer {
+    overflow: auto;
+    margin: 2% 2%;
+    scroll-snap-type: y mandatory;
+}
+
+.scrollContainer,
+.scrollArea {
+    height: 85vh;
+}
+
+.scrollArea {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 60px;
+    scroll-snap-align: start;
+}
+
+.scrollArea:nth-of-type(1) {
+    background: #e4dc92;
+}
+  
+.scrollArea:nth-of-type(2) {
+    background: #cc8a27;
+}
+
+.scrollArea:nth-of-type(3) {
+    background: #726438;
+}
+
+.scrollArea:nth-of-type(4) {
+    background: #ce590a;
+}
