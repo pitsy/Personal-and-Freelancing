@@ -1,12 +1,10 @@
 .scrollContainer {
     overflow: auto;
-    margin: 2% 2%;
     scroll-snap-type: y mandatory;
 }
 
-.scrollContainer,
-.scrollArea {
-    height: 85vh;
+.scrollContainer {
+    height: 100vh;
 }
 
 .scrollArea {
@@ -19,17 +17,21 @@
 }
 
 .scrollArea:nth-of-type(1) {
-    background: #e4dc92;
+    background: #f0f8ff;
+    height: 80vh;
 }
   
 .scrollArea:nth-of-type(2) {
     background: #cc8a27;
+    height: 100vh;
 }
 
 .scrollArea:nth-of-type(3) {
     background: #726438;
+    height: 100vh;
 }
 
 .scrollArea:nth-of-type(4) {
     background: #ce590a;
+    height: 100vh;
 }

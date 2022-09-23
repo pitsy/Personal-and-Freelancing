@@ -1,0 +1,15 @@
+.navbar {
+    background-color:rgba(240, 248, 255, 0);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.title {
+    margin: 10% 0 0 6%;
+}
+
+.description {
+    margin: 2% 15% 0 7%;
+}

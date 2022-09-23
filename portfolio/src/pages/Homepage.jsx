@@ -4,10 +4,10 @@ function Homepage() {
     return ( 
         <div>
             <div className={styles.scrollContainer}>
-                <div className={styles.scrollArea}>1</div>
-                <div className={styles.scrollArea}>2</div>
-                <div className={styles.scrollArea}>3</div>
-                <div className={styles.scrollArea}>4</div>
+                <div className={styles.scrollArea}>Frontend Developer.</div>
+                <div className={styles.scrollArea}>Design and Engineering</div>
+                <div className={styles.scrollArea}>Experience</div>
+                <div className={styles.scrollArea}>See my work</div>
             </div>
         </div> );
 }
