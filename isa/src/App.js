@@ -1,6 +1,6 @@
 import './App.css';
 import {Routes, Route, Link} from 'react-router-dom';
-import { Container, Nav, Navbar, Card, ListGroup } from 'react-bootstrap';
+import { Card, ListGroup } from 'react-bootstrap';
 import Homepage from './pages/Homepage';
 import Photography from './pages/Photography';
 import Contact from './pages/Contact';
@@ -14,10 +14,6 @@ function App() {
 
   return (
     <div>
-
-      <h2>Allan Pits</h2>
-
-      <div>
         <Card className='category-card' border='light'>
             <ListGroup variant='flush'>
                 <ListGroup.Item >
@@ -34,7 +30,6 @@ function App() {
                 </ListGroup.Item>
             </ListGroup>
         </Card>
-      </div>
 
       <Routes>
         <Route path='' element={ <Homepage /> } />

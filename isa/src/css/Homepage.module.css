@@ -1,0 +1,14 @@
+
+.imgContainer {
+    width: 100%;
+    margin: 0;
+    top: 0;
+}
+
+.image {
+    height: 100vh;
+}
+
+.homepage {
+    margin-left: 15%;
+}
