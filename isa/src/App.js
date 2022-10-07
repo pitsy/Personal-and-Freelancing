@@ -1,6 +1,6 @@
 import './App.css';
 import {Routes, Route, Link} from 'react-router-dom';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar, Card, ListGroup } from 'react-bootstrap';
 import Homepage from './pages/Homepage';
 import Photography from './pages/Photography';
 import Contact from './pages/Contact';
@@ -14,15 +14,27 @@ function App() {
 
   return (
     <div>
-      <Navbar>
-        <Container>
-            <Navbar.Brand as={Link} to='/'>Allan Pits</Navbar.Brand>
-            <Nav className="justify-content-end">
-              <Nav.Link as={Link} to='/photography'>Photography</Nav.Link>
-              <Nav.Link as={Link} to='/contact'>Contact</Nav.Link>
-            </Nav>
-        </Container>
-      </Navbar>
+
+      <h2>Allan Pits</h2>
+
+      <div>
+        <Card className='category-card' border='light'>
+            <ListGroup variant='flush'>
+                <ListGroup.Item >
+                    <div><h2 className='nav-header'>Allan Pits</h2></div>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <div><Link className='nav-element' to='/'>Homepage</Link></div>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <div><Link className='nav-element' to='/photography'>Photography</Link></div>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                    <div><Link className='nav-element' to='/contact'>Contact</Link></div>
+                </ListGroup.Item>
+            </ListGroup>
+        </Card>
+      </div>
 
       <Routes>
         <Route path='' element={ <Homepage /> } />

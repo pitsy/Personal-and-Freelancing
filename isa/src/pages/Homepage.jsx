@@ -1,7 +1,7 @@
 
 function Homepage() {
     return ( 
-        <div>
+        <div className="page">
             <p>things to add:</p>
             <br />
             <p>image carousel</p>
