@@ -1,0 +1,13 @@
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.image {
+    margin-bottom: 35px;
+}
+
+.categoryBtn {
+    margin: 20px 20px 20px 0;
+}

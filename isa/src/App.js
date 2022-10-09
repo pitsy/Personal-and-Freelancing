@@ -4,6 +4,7 @@ import { Card, ListGroup } from 'react-bootstrap';
 import Homepage from './pages/Homepage';
 import Photography from './pages/Photography';
 import Contact from './pages/Contact';
+import Admin from './pages/Admin';
 import { useEffect } from 'react';
 
 function App() {
@@ -39,6 +40,9 @@ function App() {
       </Routes>
       <Routes>
         <Route path='contact' element={ <Contact /> } />
+      </Routes>
+      <Routes>
+        <Route path='admin' element={ <Admin /> } />
       </Routes>
     </div>
   );

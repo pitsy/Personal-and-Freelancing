@@ -1,11 +1,18 @@
-import { useState } from 'react';
-import picturesFromFile from '../carouselPics.json';
+import { useEffect, useState } from 'react';
 import { Carousel } from "react-bootstrap";
 import styles from '../css/Homepage.module.css';
 
 function Homepage() {
 
-    const [pictures, setPictures] = useState(picturesFromFile);
+    const [pictures, setPictures] = useState([]);
+
+    useEffect(() => {
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/big-pictures.json')
+            .then(res => res.json())
+            .then(data => {
+                setPictures(data || []);
+            });
+    }, []);
 
     return ( 
         <div className={styles.homepage}>

@@ -1,11 +1,17 @@
 
 .gridContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .image {
-    margin-bottom: 50px;
+    margin-bottom: 35px;
+    cursor: pointer;
+}
+
+.image:hover {
+    scale: 1.02;
+    transition: 0.5s;
 }
 
 .popup {
@@ -80,4 +86,12 @@
 
 .rightBtn:hover {
     scale: 1.2;
+}
+
+.largeImage {
+    margin-top: 2%;
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    transition: 1s;
 }
