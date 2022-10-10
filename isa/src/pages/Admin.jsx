@@ -1,57 +1,49 @@
 import { useEffect, useState } from 'react';
 import styles from '../css/Admin.module.css';
 import { Card, Button, ButtonGroup } from 'react-bootstrap';
-import {Routes, Route, Link} from 'react-router-dom';
-import AddPicture from './AddPicture';
+import {Link} from 'react-router-dom';
 
 function Admin() {
 
-    const [thumbnails, setThumbnails] = useState([]);
-    const [bigPictures, setBigPictures] = useState([]);
-    const categories = [...new Set(thumbnails.map(e => e.category))].sort();
+    const [pictures, setPictures] = useState([]);
+    const categories = [...new Set(pictures.map(e => e.category))].sort();
     const [filteredPictures, setFilteredPictures] = useState([]);
     const [activeCategory, setActiveCategory] = useState('all');
+    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('loggedIn') || false);
 
     useEffect(() => {
-        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/thumbnails.json')
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
             .then(res => res.json())
             .then(data => {
-                setThumbnails(data || []);
-            });
-        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/big-pictures.json')
-            .then(res => res.json())
-            .then(data => {
-                setBigPictures(data || []);
+                setPictures(data || []);
             });
     }, []);
 
     function filterByCategory(categoryClicked) {
         if (categoryClicked === 'all') {
-            setFilteredPictures(thumbnails);
+            setFilteredPictures(pictures);
             setActiveCategory('all');
         } else {
-            const result = thumbnails.filter(element => element.category === categoryClicked);
+            const result = pictures.filter(element => element.category === categoryClicked);
             setFilteredPictures(result);
             setActiveCategory(categoryClicked);
         }
     }
 
     function deletePicture(pictureClicked) {
-        const index = thumbnails.findIndex(element => element.id === pictureClicked.id);
-        thumbnails.splice(index,1);
-        setThumbnails(thumbnails.slice());
-        bigPictures.splice(index,1);
-        setBigPictures(bigPictures.slice());
-        // fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/thumbnails.json', {
-        //     method: 'PUT',
-        //     body: JSON.stringify(thumbnails)
-        // });
+        const index = pictures.findIndex(element => element.id === pictureClicked.id);
+        pictures.splice(index,1);
+        setPictures(pictures.slice());
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json', {
+            method: 'PUT',
+            body: JSON.stringify(pictures)
+        });
         filterByCategory(activeCategory);
     }
 
     return ( 
         <div className='page'>
-
+            { isLoggedIn && <div>sisse logitud</div> }
             <span className={styles.categoryBtn}><b>Categories:</b></span>
             <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>all</Button>
             {categories.map(category => 
@@ -62,26 +54,23 @@ function Admin() {
                 </span> )}
             
             <div>
-                <Button variant='outline-primary' size='lg' className={styles.categoryBtn}><Link to='/add-picture'>Add picture</Link></Button>
+                <Link to='/add-picture'>
+                    <Button variant='outline-primary' size='lg' className={styles.categoryBtn}>Add picture</Button>
+                </Link>
             </div>
 
             <div className={styles.gridContainer}>
-            {filteredPictures.map((element, index) =>
+            {filteredPictures.map(element =>
                 <div key={element.id}>
                     <Card className={styles.image} style={{ width: '18rem' }} bg='light'>
-                        <Card.Img src={element.image} alt={element.name} />
+                        <Card.Img src={element.thumbnail} alt={element.name} />
                         <Card.Text>ID: {element.id} Name: {element.name} Category: {element.category}</Card.Text>
                         <ButtonGroup>
                             <Button variant='outline-primary'>Edit</Button><Button variant='outline-danger' onClick={() => deletePicture(element)}>Delete</Button>
                         </ButtonGroup>
                     </Card>
                 </div> )}    
-            </div>
-
-            
-            <Routes>
-                <Route path='add-picture' element={ <AddPicture /> } />
-            </Routes>
+            </div> 
         </div> );
 }
 

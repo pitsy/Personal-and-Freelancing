@@ -4,21 +4,15 @@ import { Card } from 'react-bootstrap';
 
 function Photography() {
 
-    const [thumbnails, setThumbnails] = useState([]);
-    const [bigPictures, setBigPictures] = useState([]);
+    const [pictures, setPictures] = useState([]);
     const [pictureIndex, setPictureIndex] = useState(0);
     const [imgActive, setImgActive] = useState(false);
 
     useEffect(() => {
-        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/thumbnails.json')
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
             .then(res => res.json())
             .then(data => {
-                setThumbnails(data || []);
-            });
-        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/big-pictures.json')
-            .then(res => res.json())
-            .then(data => {
-                setBigPictures(data || []);
+                setPictures(data || []);
             });
     }, []);
 
@@ -28,7 +22,7 @@ function Photography() {
     }
 
     function nextImage() {
-        if (pictureIndex <= (bigPictures.length - 2)) {
+        if (pictureIndex <= (pictures.length - 2)) {
             let index = pictureIndex;
             index += 1;
             setPictureIndex(index);
@@ -52,20 +46,20 @@ function Photography() {
 
             { imgActive && <div className={styles.popup}>
                 <div className={styles.topBar}>
-                    <p>{bigPictures[pictureIndex].name}</p>
+                    <p>{pictures[pictureIndex].name}</p>
                     <img onClick={() => setImgActive(false)} className={styles.closeBtn} src={require('../images/close.png')} alt="" />
                 </div>
                 <img onClick={nextImage} className={styles.rightBtn} src={require('../images/arrow.png')} alt="" />
                 <img onClick={previousImage} className={styles.leftBtn} src={require('../images/arrow.png')} alt="" />
-                <img className={styles.largeImage} src={bigPictures[pictureIndex].image} alt="" />
+                <img className={styles.largeImage} src={pictures[pictureIndex].bigpicture} alt="" />
             </div> }
 
             <br /><br />
             <div className={styles.gridContainer}>
-            {thumbnails.map((element, index) =>
+            {pictures.map((element, index) =>
                 <div key={element.id}>
                     <Card onClick={() => setActivePicture(index)} className={styles.image} style={{ width: '18rem' }} bg='light'>
-                        <Card.Img src={element.image} alt={element.name} />
+                        <Card.Img src={element.thumbnail} alt={element.name} />
                     </Card>
                 </div> )}    
             </div>
