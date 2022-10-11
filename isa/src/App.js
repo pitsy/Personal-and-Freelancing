@@ -9,6 +9,7 @@ import AddPicture from './pages/AddPicture';
 import Login from './pages/Login';
 import AuthContext from './components/AuthContext';
 import { useEffect, useContext } from 'react';
+import EditPicture from './pages/EditPicture';
 
 function App() {
 
@@ -17,6 +18,8 @@ function App() {
   useEffect(() => {
     document.body.style.backgroundColor = '#ebfcf9';
   }, []);
+
+  console.log(authCtx.isLoggedIn);
 
   return (
     <div>
@@ -49,14 +52,17 @@ function App() {
       <Routes>
         <Route path='login' element={ <Login /> } />
       </Routes>
-      { authCtx.isLoggedIn && <> </> }
+      { authCtx.isLoggedIn && <> 
         <Routes>
           <Route path='admin' element={ <Admin /> } />
         </Routes>
         <Routes>
           <Route path='add-picture' element={ <AddPicture /> } />
         </Routes>
-      
+        <Routes>
+          <Route path='edit-picture/:id' element={ <EditPicture /> } />
+        </Routes>
+      </> }
     </div>
   );
 }

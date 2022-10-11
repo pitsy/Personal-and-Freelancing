@@ -7,12 +7,12 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('loggedIn') || false);
+    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('loggedIn') || false); 
 
     function updateLoggedIn(newValue) {
         setIsLoggedIn(newValue);
         sessionStorage.setItem('loggedIn', newValue);
-        console.log('logged in');
+        console.log(newValue);
     }
 
     return (

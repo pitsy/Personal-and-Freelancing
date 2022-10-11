@@ -12,6 +12,7 @@ function AddPicture() {
     const categoryRef = useRef();
 
     const [pictures, setPictures] = useState([]);
+    const [defaultId, setDefaultId] = useState('');
     const [idUnique, setIdUnique] = useState(true);
     const [message, setMessage] = useState('');
     const [thumbnail, setThumbnail] = useState('');
@@ -23,6 +24,7 @@ function AddPicture() {
             .then(res => res.json())
             .then(data => {
                 setPictures(data || []);
+                setDefaultId(data.length + 1);
             });
     }, []);
 
@@ -77,7 +79,7 @@ function AddPicture() {
             <br /><br /><br />
             <h2>Add new picture</h2>
             <div>{message}</div> <br />
-            <label>ID </label> <br />
+            <label>ID (next: {defaultId})</label> <br />
             <input onChange={checkIdUniqueness} ref={idRef} type="number" /> <br />
             <label>Name </label> <br />
             <input ref={nameRef} type="text" /> <br />

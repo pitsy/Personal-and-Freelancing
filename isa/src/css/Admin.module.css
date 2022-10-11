@@ -8,6 +8,16 @@
     margin-bottom: 35px;
 }
 
+.bigButtons {
+    width: 100%;
+}
+
 .categoryBtn {
     margin: 20px 20px 20px 0;
+}
+
+.logoutBtn {
+    position: relative;
+    float: right;
+    margin-right: 80px;
 }
