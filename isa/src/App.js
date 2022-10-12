@@ -10,17 +10,17 @@ import Login from './pages/Login';
 import AuthContext from './components/AuthContext';
 import { useEffect, useContext } from 'react';
 import EditPicture from './pages/EditPicture';
+import { useState } from 'react';
 
 function App() {
 
   const authCtx = useContext(AuthContext);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     document.body.style.backgroundColor = '#ebfcf9';
   }, []);
-
-  console.log(authCtx.isLoggedIn);
-
+  
   return (
     <div>
       <Card className='category-card' border='light'>
@@ -32,8 +32,14 @@ function App() {
             <div><Link className='nav-element' to='/'>Homepage</Link></div>
           </ListGroup.Item>
           <ListGroup.Item>
-            <div><Link className='nav-element' to='/photography'>Photography</Link></div>
+            <div><Link className='nav-element' onClick={() => setActive(!active)}>Photography</Link></div>
           </ListGroup.Item>
+          {active && <div><ListGroup.Item>
+            <div><Link className='nav-element' to='/photography'>Moscow</Link></div>
+          </ListGroup.Item>
+          <ListGroup.Item>
+            <div><Link className='nav-element' to='/photography'>Landscape</Link></div>
+          </ListGroup.Item> </div>}
           <ListGroup.Item>
             <div><Link className='nav-element' to='/contact'>Contact</Link></div>
           </ListGroup.Item>

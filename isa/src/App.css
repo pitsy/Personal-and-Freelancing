@@ -30,3 +30,24 @@
 .list-group-item {
     border: none;
 }
+
+.carousel-item {
+    align-items: center;
+}
+
+.alert {
+    position: fixed;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 50%;
+    height: 20%;
+    background: #ebfcf9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+    overflow: hidden;
+}

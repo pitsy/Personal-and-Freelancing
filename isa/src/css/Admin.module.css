@@ -20,4 +20,10 @@
     position: relative;
     float: right;
     margin-right: 80px;
+    top: 50%;
+    transform: translate(0, 43%);
+}
+
+.alertBtn {
+    margin-left: 10px;
 }
