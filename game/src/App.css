@@ -1,0 +1,22 @@
+
+.game-board {
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+button {
+    background: none;
+    border: 2px solid #02001f;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: #02001f;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+button:hover {
+    background: rgb(122, 58, 206);
+    color: white;
+}
+

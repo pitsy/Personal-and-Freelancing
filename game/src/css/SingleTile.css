@@ -1,0 +1,20 @@
+
+.tile {
+    position: relative;
+}
+
+.inactive {
+    transform: rotateY(90deg);
+    position: absolute;
+}
+
+.active {
+    max-width: 100%;
+}
+
+.game-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: fit-content(100%) fit-content(100%) fit-content(100%);
+    grid-gap: 10px;
+}
