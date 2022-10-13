@@ -7,7 +7,8 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider = (props) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(sessionStorage.getItem('loggedIn') || false); 
+    const [isLoggedIn, setIsLoggedIn] = useState(JSON.parse(sessionStorage.getItem('loggedIn')) || false); 
+    // json.parse
 
     function updateLoggedIn(newValue) {
         setIsLoggedIn(newValue);

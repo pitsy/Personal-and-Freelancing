@@ -79,8 +79,8 @@ function AddPicture() {
             <br /><br /><br />
             <h2>Add new picture</h2>
             <div>{message}</div> <br />
-            <label>ID (next: {defaultId})</label> <br />
-            <input onChange={checkIdUniqueness} ref={idRef} type="number" /> <br />
+            <label>ID </label> <br />
+            <input onChange={checkIdUniqueness} value={defaultId} ref={idRef} type="number" /> <br />
             <label>Name </label> <br />
             <input ref={nameRef} type="text" /> <br />
             <label>Image </label> <br />
