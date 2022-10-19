@@ -37,10 +37,10 @@ function Admin() {
         const index = pictures.findIndex(element => element.id === tempPicId);
         pictures.splice(index,1);
         setPictures(pictures.slice());
-        // fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json', {
-        //     method: 'PUT',
-        //     body: JSON.stringify(pictures)
-        // });
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json', {
+            method: 'PUT',
+            body: JSON.stringify(pictures)
+        });
         filterByCategory(activeCategory);
         setShowAlert(false);
     }

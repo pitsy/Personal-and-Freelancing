@@ -77,13 +77,13 @@ function AddPicture() {
     return ( 
         <div className="page">
             <br /><br /><br />
-            <h2>Add new picture</h2>
+            <h2 className="white-text">Add new picture</h2>
             <div>{message}</div> <br />
-            <label>ID </label> <br />
-            <input onChange={checkIdUniqueness} value={defaultId} ref={idRef} type="number" /> <br />
-            <label>Name </label> <br />
+            <label className="white-text">ID </label> <br />
+            <input onChange={checkIdUniqueness} defaultValue={defaultId} ref={idRef} type="number" /> <br />
+            <label className="white-text">Name </label> <br />
             <input ref={nameRef} type="text" /> <br />
-            <label>Image </label> <br />
+            <label className="white-text">Image </label> <br />
             <ButtonGroup className="mb-2">
                 <ToggleButton id="url" type="radio" variant="outline-primary" name="radio" value="url" checked={showImage === "url"} onChange={() => setShowImage('url')}
                 >
@@ -94,14 +94,14 @@ function AddPicture() {
                     Upload
                 </ToggleButton>
             </ButtonGroup>
-            {showImage === 'url' && <div>Thumbnail <input ref={thumbnailRef} type="text" /></div> } <br />
-            {showImage === 'url' && <div>Big picture <input ref={bigPictureRef} type="text" /></div> }
-            {showImage === 'upload' && <div>Thumbnail</div> }
+            {showImage === 'url' && <div className="white-text">Thumbnail <input ref={thumbnailRef} type="text" /></div> } <br />
+            {showImage === 'url' && <div className="white-text">Big picture <input ref={bigPictureRef} type="text" /></div> }
+            {showImage === 'upload' && <div className="white-text">Thumbnail</div> }
             {showImage === 'upload' && <FileUpload onSendPictureUrl={setThumbnail}/>}
-            {showImage === 'upload' && <div>Big picture</div> }
+            {showImage === 'upload' && <div className="white-text">Big picture</div> }
             {showImage === 'upload' && <FileUpload onSendPictureUrl={setBigPicture}/>} 
             <br />
-            <label>Category </label> <br />
+            <label className="white-text">Category </label> <br />
             <input ref={categoryRef} type="text" /> <br /> <br />
             <Button variant='outline-primary' size='lg' disabled={!idUnique} onClick={addNewPicture}>Add picture</Button>
         </div> );

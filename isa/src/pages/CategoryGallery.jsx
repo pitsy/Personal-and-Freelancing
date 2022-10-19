@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import styles from '../css/Photography.module.css';
 import { Card } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 
-function Photography() {
-
+function CategoryGallery() {
     const [pictures, setPictures] = useState([]);
     const [pictureIndex, setPictureIndex] = useState(0);
     const [imgActive, setImgActive] = useState(false);
+
+    const {category} = useParams(); // useParams always comes as a string
+    // const pictureFound = pictures.find(element => element.category === category);
 
     useEffect(() => {
         fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
@@ -56,7 +59,7 @@ function Photography() {
 
             <br /><br />
             <div className={styles.gridContainer}>
-            {pictures.sort((a,b) => a.id - b.id).map((element, index) =>
+            {pictures.filter(element => element.category === category).map((element, index) =>
                 <div key={element.id}>
                     <Card onClick={() => setActivePicture(index)} className={styles.image} style={{ width: '18rem' }} bg='light'>
                         <Card.Img src={element.thumbnail} alt={element.name} />
@@ -66,4 +69,4 @@ function Photography() {
         </div> );
 }
 
-export default Photography;
+export default CategoryGallery;

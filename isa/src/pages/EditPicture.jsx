@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, ButtonGroup, ToggleButton } from 'react-bootstrap';
-import FileUpload from '../components/FileUpload'
+import { Button } from 'react-bootstrap';
+// import FileUpload from '../components/FileUpload'
 
 function EditPicture() {
 
     const idRef = useRef();
     const nameRef = useRef();
-    const thumbnailRef = useRef();
-    const bigPictureRef = useRef();
+    // const thumbnailRef = useRef();
+    // const bigPictureRef = useRef();
     const categoryRef = useRef();
 
     const navigate = useNavigate();
@@ -17,9 +17,9 @@ function EditPicture() {
     const [idUnique, setIdUnique] = useState(true);
     const [message, setMessage] = useState('');
 
-    const [thumbnail, setThumbnail] = useState('');
-    const [bigPicture, setBigPicture] = useState('');
-    const [showImage, setShowImage] = useState('upload');
+    // const [thumbnail, setThumbnail] = useState('');
+    // const [bigPicture, setBigPicture] = useState('');
+    // const [showImage, setShowImage] = useState('upload');
 
     const pictureFound = pictures.find(element => element.id === Number(id));
 
@@ -52,8 +52,8 @@ function EditPicture() {
         const newPicture = {
             id: Number(idRef.current.value),
             name: nameRef.current.value,
-            thumbnail: showImage === 'url' ? thumbnailRef.current.value : thumbnail,
-            bigpicture: showImage === 'url' ? bigPictureRef.current.value : bigPicture,
+            thumbnail: pictureFound.thumbnail,
+            bigpicture: pictureFound.bigpicture,
             category: categoryRef.current.value,
         }
 
@@ -81,29 +81,16 @@ function EditPicture() {
             <div>{message}</div>
             { pictureFound !== undefined && 
                 <div>
-                    <label>ID </label> <br />
+                    <label className="white-text">ID </label> <br />
                     <input onChange={checkIdUniqueness} ref={idRef} defaultValue={pictureFound.id} type="number" /> <br />
-                    <label>Name </label> <br />
+                    <label className="white-text">Name </label> <br />
                     <input ref={nameRef} defaultValue={pictureFound.name} type="text" /> <br /> 
-                    <label>Image </label> <br />
-                    <ButtonGroup className="mb-2">
-                        <ToggleButton id="url" type="radio" variant="outline-primary" name="radio" value="url" checked={showImage === "url"} onChange={() => setShowImage('url')}
-                        >
-                            URL
-                        </ToggleButton>
-                        <ToggleButton id="upload" type="radio" variant="outline-primary" name="radio" value="upload" checked={showImage === "upload"} onChange={() => setShowImage('upload')}
-                        >
-                            Upload
-                        </ToggleButton>
-                    </ButtonGroup>
-                    {showImage === 'url' && <div>Thumbnail <input ref={thumbnailRef} type="text" /></div> } <br />
-                    {showImage === 'url' && <div>Big picture <input ref={bigPictureRef} type="text" /></div> }
-                    {showImage === 'upload' && <div>Thumbnail</div> }
-                    {showImage === 'upload' && <FileUpload onSendPictureUrl={setThumbnail}/>}
-                    {showImage === 'upload' && <div>Big picture</div> }
-                    {showImage === 'upload' && <FileUpload onSendPictureUrl={setBigPicture}/>} 
+                    <label className="white-text">Image </label> <br />
+                    <div>
+                        <img src={pictureFound.thumbnail} alt="" />
+                    </div>
                     <br />
-                    <label>Category </label> <br />
+                    <label className="white-text">Category </label> <br />
                     <input ref={categoryRef} defaultValue={pictureFound.category} type="text" /> <br /> <br />
                     <Button disabled={!idUnique} onClick={updatePicture} variant='outline-primary'>Muuda pilti</Button>
                 </div>}
@@ -112,3 +99,36 @@ function EditPicture() {
 }
 
 export default EditPicture;
+
+{/* <ButtonGroup className="mb-2">
+                        <ToggleButton 
+                            id="url" 
+                            type="radio" 
+                            variant="outline-primary" 
+                            name="radio" value="url" 
+                            checked={showImage === "url"} 
+                            onChange={() => setShowImage('url')}
+                        >
+                            URL
+                        </ToggleButton>
+                        <ToggleButton 
+                            id="upload" 
+                            type="radio" 
+                            variant="outline-primary" 
+                            name="radio" value="upload" 
+                            checked={showImage === "upload"} 
+                            onChange={() => setShowImage('upload')}
+                        >
+                            Upload
+                        </ToggleButton>
+                    </ButtonGroup>
+                    {showImage === 'url' && <div className="white-text">
+                        Thumbnail <input defaultValue={pictureFound.thumbnail} ref={thumbnailRef} type="text" />
+                    </div> } <br />
+                    {showImage === 'url' && <div className="white-text">
+                        Big picture <input defaultValue={pictureFound.bigPicture} ref={bigPictureRef} type="text" />
+                    </div> }
+                    {showImage === 'upload' && <div className="white-text">Thumbnail</div> }
+                    {showImage === 'upload' && <FileUpload onSendPictureUrl={setThumbnail}/>} 
+                    {showImage === 'upload' && <div className="white-text">Big picture</div> } 
+                    {showImage === 'upload' && <FileUpload onSendPictureUrl={setBigPicture}/>}  */}

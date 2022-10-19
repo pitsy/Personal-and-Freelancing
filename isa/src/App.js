@@ -8,18 +8,25 @@ import Admin from './pages/Admin';
 import AddPicture from './pages/AddPicture';
 import Login from './pages/Login';
 import AuthContext from './components/AuthContext';
-import { useEffect, useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import EditPicture from './pages/EditPicture';
 import { useState } from 'react';
+import CategoryGallery from './pages/CategoryGallery';
 
 function App() {
 
   const authCtx = useContext(AuthContext);
   const [active, setActive] = useState(false);
+  const [pictures, setPictures] = useState([]);
+  const categories = [...new Set(pictures.map(e => e.category))].sort();
 
   useEffect(() => {
-    document.body.style.backgroundColor = '#ebfcf9';
-  }, []);
+    fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
+        .then(res => res.json())
+        .then(data => {
+            setPictures(data || []);
+        });
+}, []);
   
   return (
     <div>
@@ -34,12 +41,12 @@ function App() {
           <ListGroup.Item>
             <div><Link className='nav-element' onClick={() => setActive(!active)}>Photography</Link></div>
           </ListGroup.Item>
-          {active && <div><ListGroup.Item>
-            <div><Link className='nav-element' to='/photography'>Moscow</Link></div>
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <div><Link className='nav-element' to='/photography'>Landscape</Link></div>
-          </ListGroup.Item> </div>}
+          {active && 
+          categories.map(element => 
+            <ListGroup.Item key={element}>
+              <div><Link className='nav-element' to={'/gallery/' + element}>{element}</Link></div>
+            </ListGroup.Item>
+          )}
           <ListGroup.Item>
             <div><Link className='nav-element' to='/contact'>Contact</Link></div>
           </ListGroup.Item>
@@ -67,6 +74,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path='edit-picture/:id' element={ <EditPicture /> } />
+        </Routes>
+        <Routes>
+          <Route path='gallery/:category' element={ <CategoryGallery /> } />
         </Routes>
       </> }
     </div>

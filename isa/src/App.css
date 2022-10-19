@@ -27,6 +27,10 @@
     top: 0%;
 }
 
+.white-text {
+    color: white;
+}
+
 .list-group-item {
     border: none;
 }
