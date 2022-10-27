@@ -71,7 +71,7 @@ function FileUpload(props) {
     // uploadPicture(fileToUpload);  ->  kui ei taha nuppu "lae ules"
     }
     return (<div>
-        <input onChange={(e) => handleFileInput(e)} type="file" />
+        <input className="white-text" onChange={(e) => handleFileInput(e)} type="file" />
         <button onClick={() => uploadPicture(fileToUpload)}>Lae üles</button>
     </div>)
 }

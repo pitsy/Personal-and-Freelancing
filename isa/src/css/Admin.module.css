@@ -6,6 +6,7 @@
 
 .image {
     margin-bottom: 35px;
+    color: black;
 }
 
 .bigButtons {
@@ -30,4 +31,54 @@
 
 .alertBtn {
     margin-left: 10px;
+}
+
+.keywordBtn {
+    margin-left: 20px;
+    transform: translate(0, -7%);
+}
+
+.keyword {
+    margin: 2px 20px 0 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 3px;
+    font-size: 14px;
+}
+
+.keywordRemoveBtn {
+    position: relative;
+    background-color: transparent;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    padding: 1px 6px;
+    scale: 0.9;
+}
+
+.keywordRemoveBtn:hover {
+    background-color: white;
+    opacity: 0.9;
+    color: black;
+}
+
+.searchNav ul {
+    margin-top: 5px;
+    height: 200px;
+    width: 100%;
+    max-width: 210px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.searchElement {
+    margin-bottom: 3px;
+}
+
+.searchElement:hover {
+    background-color: rgb(97, 139, 255);
+    color: black;
+    cursor: pointer;
 }

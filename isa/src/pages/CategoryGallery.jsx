@@ -46,7 +46,6 @@ function CategoryGallery() {
 
     return ( 
         <div className='page'>
-
             { imgActive && <div className={styles.popup}>
                 <div className={styles.topBar}>
                     <p>{pictures[pictureIndex].name}</p>
