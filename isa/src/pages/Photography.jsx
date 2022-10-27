@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import styles from '../css/Photography.module.css';
 import { Card } from 'react-bootstrap';
 
+// REPLACED BY CATEGORY GALLERY!!!
+
 function Photography() {
 
     const [pictures, setPictures] = useState([]);

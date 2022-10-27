@@ -8,14 +8,28 @@
     height: 100vh;
     position: fixed;
     overflow: auto;
+    border-radius: 0;
+}
+
+.nav-category {
+    margin-left: 20px;
+    font-weight: 300;
 }
 
 .nav-element {
+    font-weight: 500;
+}
+
+.nav-element, .nav-category {
     display: block;
     color: black;
     /* padding: 8px 16px; */
     text-decoration: none;
     margin-bottom: 5px;
+}
+
+.nav-element:hover, .nav-category:hover {
+    color: rgb(48, 48, 48);
 }
 
 .nav-header {

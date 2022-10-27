@@ -26,7 +26,7 @@ function App() {
         .then(data => {
             setPictures(data || []);
         });
-}, []);
+  }, []);
   
   return (
     <div>
@@ -44,7 +44,7 @@ function App() {
           {active && 
           categories.map(element => 
             <ListGroup.Item key={element}>
-              <div><Link className='nav-element' to={'/gallery/' + element}>{element}</Link></div>
+              <div><Link className='nav-category' to={'/gallery/' + element}>{element}</Link></div>
             </ListGroup.Item>
           )}
           <ListGroup.Item>
@@ -65,6 +65,9 @@ function App() {
       <Routes>
         <Route path='login' element={ <Login /> } />
       </Routes>
+      <Routes>
+        <Route path='gallery/:category' element={ <CategoryGallery /> } />
+      </Routes>
       { authCtx.isLoggedIn && <> 
         <Routes>
           <Route path='admin' element={ <Admin /> } />
@@ -74,9 +77,6 @@ function App() {
         </Routes>
         <Routes>
           <Route path='edit-picture/:id' element={ <EditPicture /> } />
-        </Routes>
-        <Routes>
-          <Route path='gallery/:category' element={ <CategoryGallery /> } />
         </Routes>
       </> }
     </div>
