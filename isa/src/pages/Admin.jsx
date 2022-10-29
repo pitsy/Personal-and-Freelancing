@@ -50,6 +50,11 @@ function Admin() {
         setTempPicId(pictureClicked.id);
         setShowAlert(true);
     }
+
+    function saveKeywords(keywords) {
+        const selectedKeywords = JSON.stringify(keywords);
+        sessionStorage.setItem('keywords', selectedKeywords)
+    }
     
     return ( 
         <div className='page'>
@@ -60,7 +65,6 @@ function Admin() {
                     <Button variant='outline-primary' className={styles.alertBtn} onClick={() => setShowAlert(false)}>Ei</Button>
                 </div>                
             </Alert>
-
             <span className={styles.categoryBtn}><b>Categories:</b></span>
             <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>all</Button>
             {categories.map(category => 
@@ -68,23 +72,21 @@ function Admin() {
                     <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory(category)}>
                         {category}
                     </Button>
-                </span> )}
-            
+                </span> )}            
             <div>
                 <Link to='/add-picture'>
                     <Button variant='outline-primary' size='lg' className={styles.categoryBtn}>Add picture</Button>
                 </Link>
                 <Button variant='outline-primary' size='lg' className={styles.logoutBtn} onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>
             </div>
-
             <div className={styles.gridContainer}>
             {filteredPictures.map(element =>
                 <div key={element.id}>
                     <Card className={styles.image} style={{ width: '18rem' }} bg='light'>
                         <Card.Img src={element.thumbnail} alt={element.name} />
-                        <Card.Text>ID: {element.id} Name: {element.name} Category: {element.category}</Card.Text>
+                        <Card.Text>ID: {element.id} Nimi: {element.name} Kategooria: {element.category} Märksõnad: {element.keywords}</Card.Text>
                         <ButtonGroup>
-                            <Button variant='outline-primary'><Link to={'/edit-picture/' + element.id}>Edit</Link></Button>
+                            <Button variant='outline-primary' onClick={() => saveKeywords(element.keywords)}><Link to={'/edit-picture/' + element.id}>Edit</Link></Button>
                             <Button variant='outline-danger' onClick={() => alert(element)}>Delete</Button>
                         </ButtonGroup>
                     </Card>

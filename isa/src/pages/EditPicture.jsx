@@ -1,28 +1,39 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import styles from '../css/Admin.module.css';
 
 function EditPicture() {
 
     const idRef = useRef();
     const nameRef = useRef();
     const categoryRef = useRef();
+    const keywordRef = useRef();
 
     const navigate = useNavigate();
     const {id} = useParams(); // useParams always comes as a string
     const [pictures, setPictures] = useState([]);
     const [idUnique, setIdUnique] = useState(true);
     const [message, setMessage] = useState('');
+    const [dbKeywords, setDbKeywords] = useState([]);
+    const [keywords, setKeywords] = useState([]);
+    const [active, setActive] = useState(false);
 
     const pictureFound = pictures.find(element => element.id === Number(id));
-
     const index = pictures.indexOf(pictureFound);
+    const [selectedKeywords, setSelectedKeywords] = useState(JSON.parse(sessionStorage.getItem('keywords')) || []);
 
     useEffect(() => {
         fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
             .then(res => res.json())
             .then(data => {
                 setPictures(data || []);
+            });
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/keywords.json')
+            .then(res => res.json())
+            .then(data => {
+                setKeywords(data || []);
+                setDbKeywords(data || []);
             });
     }, []);
 
@@ -40,6 +51,9 @@ function EditPicture() {
 
         if (idNotFilled || nameNotFilled || categoryNotFilled) {
             return;
+        } else if(selectedKeywords.lenght === 0) { 
+            setMessage('Märksõnad on täitmata');
+            return;
         }
 
         const newPicture = {
@@ -48,6 +62,7 @@ function EditPicture() {
             thumbnail: pictureFound.thumbnail,
             bigpicture: pictureFound.bigpicture,
             category: categoryRef.current.value,
+            keywords: selectedKeywords
         }
 
         pictures[index] = newPicture;
@@ -68,6 +83,37 @@ function EditPicture() {
         }
     }
 
+    function addNewKeyword() {
+        selectedKeywords.push(keywordRef.current.value);
+        setSelectedKeywords(selectedKeywords.slice());
+        dbKeywords.push(keywordRef.current.value);
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/keywords.json', {
+            method: 'PUT',
+            body: JSON.stringify(dbKeywords),
+        });
+        keywordRef.current.value = '';
+        searchKeywords();
+    }
+
+    function searchKeywords() {
+        const result = dbKeywords.filter(element => element.toLowerCase().includes(keywordRef.current.value.toLowerCase()));
+        setKeywords(result);
+    }
+
+    function selectKeyword(element) {
+        selectedKeywords.push(element);
+        setSelectedKeywords(selectedKeywords.slice());
+    }
+
+    function removeSelectedKeyword(index) {
+        selectedKeywords.splice(index,1);
+        setSelectedKeywords(selectedKeywords.slice());
+    }
+
+    function dropdown() {
+        setActive(true);
+    }
+
     return ( 
         <div className="page">
             <br /> <br />
@@ -76,15 +122,33 @@ function EditPicture() {
                 <div>
                     <label className="white-text">ID </label> <br />
                     <input onChange={checkIdUniqueness} ref={idRef} defaultValue={pictureFound.id} type="number" /> <br />
-                    <label className="white-text">Name </label> <br />
+                    <label className="white-text">Nimi </label> <br />
                     <input ref={nameRef} defaultValue={pictureFound.name} type="text" /> <br /> 
-                    <label className="white-text">Image </label> <br />
+                    <label className="white-text">Pilt </label> <br />
                     <div>
                         <img src={pictureFound.thumbnail} alt="" />
                     </div>
                     <br />
-                    <label className="white-text">Category </label> <br />
-                    <input ref={categoryRef} defaultValue={pictureFound.category} type="text" /> <br /> <br />
+                    <label className="white-text">Kategooria </label> <br />
+                    <input ref={categoryRef} defaultValue={pictureFound.category} type="text" /> <br />
+                    <label>Märksõnad </label> <br />
+                    <div>
+                        <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={dropdown}/> 
+                        <Button className={styles.keywordBtn} variant='outline-light' size='sm' onClick={addNewKeyword}>Lisa märksõna</Button>
+                        {active && <nav className={styles.searchNav}>
+                            <ul>
+                                {keywords.map(element =>
+                                    <div key={element} className={styles.searchElement} onClick={() => selectKeyword(element)}>{element}</div> )}
+                            </ul>
+                        </nav>}
+                    </div>
+                    {selectedKeywords.map((element, index) => 
+                        <span className={styles.keyword} key={element}>
+                            {element} 
+                            <button className={styles.keywordRemoveBtn} onClick={() => removeSelectedKeyword(index)}>X</button>
+                        </span> 
+                    )}
+                    <br /> <br />
                     <Button disabled={!idUnique} onClick={updatePicture} variant='outline-primary'>Muuda pilti</Button>
                 </div>}
                 { pictureFound === undefined && <div>Pilti ei leitud</div> }

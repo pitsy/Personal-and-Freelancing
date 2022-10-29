@@ -54,7 +54,7 @@ function AddPicture() {
         
         if (idNotFilled || nameNotFilled || categoryNotFilled) {
             return;
-        } else if(keywords.lenght === 0) { 
+        } else if(selectedKeywords.lenght === 0) { 
             setMessage('Märksõnad on täitmata');
             return;
         }
@@ -65,7 +65,7 @@ function AddPicture() {
             thumbnail: showImage === 'url' ? thumbnailRef.current.value : thumbnail,
             bigpicture: showImage === 'url' ? bigPictureRef.current.value : bigPicture,
             category: categoryRef.current.value,
-            keywords: keywords,
+            keywords: selectedKeywords,
         }
 
         pictures.push(newPicture);
