@@ -95,3 +95,19 @@
     object-fit: contain;
     transition: 1s;
 }
+
+.searchContainer {
+    margin-top: 20px;
+}
+
+.searchBar {
+    width: 20%;
+    min-width: 250px;
+    border: none;
+    border-radius: 5px;
+}
+
+.keywordBtn {
+    margin-right: 10px;
+    border-radius: 10px;
+}

@@ -73,6 +73,16 @@
     padding: 5px;
 }
 
+.categorySearchNav ul {
+    margin-top: 5px;
+    height: 110px;
+    width: 100%;
+    max-width: 210px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
 .searchElement {
     margin-bottom: 3px;
 }

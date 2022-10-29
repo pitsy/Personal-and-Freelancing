@@ -9,6 +9,7 @@ function EditPicture() {
     const nameRef = useRef();
     const categoryRef = useRef();
     const keywordRef = useRef();
+    const dateRef = useRef();
 
     const navigate = useNavigate();
     const {id} = useParams(); // useParams always comes as a string
@@ -17,7 +18,9 @@ function EditPicture() {
     const [message, setMessage] = useState('');
     const [dbKeywords, setDbKeywords] = useState([]);
     const [keywords, setKeywords] = useState([]);
-    const [active, setActive] = useState(false);
+    const [keywordActive, setKeywordActive] = useState(false);
+    const [categoryActive, setCategoryActive] = useState(false);
+    const categories = [...new Set(pictures.map(e => e.category))].sort();
 
     const pictureFound = pictures.find(element => element.id === Number(id));
     const index = pictures.indexOf(pictureFound);
@@ -110,8 +113,16 @@ function EditPicture() {
         setSelectedKeywords(selectedKeywords.slice());
     }
 
-    function dropdown() {
-        setActive(true);
+    function selectCategory(element) {
+        categoryRef.current.value = element;
+    }
+
+    function dropdown(value) {
+        if (value === 1) {
+            setKeywordActive(true);
+        } else if (value === 2) {
+            setCategoryActive(true);
+        }       
     }
 
     return ( 
@@ -129,13 +140,23 @@ function EditPicture() {
                         <img src={pictureFound.thumbnail} alt="" />
                     </div>
                     <br />
-                    <label className="white-text">Kategooria </label> <br />
-                    <input ref={categoryRef} defaultValue={pictureFound.category} type="text" /> <br />
+                    <label>Kuupäev </label> <br />
+                    <input ref={dateRef} type="text" defaultValue={pictureFound.date} /> <br />
+                    <label>Kategooria </label> <br />
+                    <div>
+                        <input ref={categoryRef} type="text" onClick={() => dropdown(2)} defaultValue={pictureFound.category}/> 
+                        {categoryActive && <nav className={styles.categorySearchNav}>
+                            <ul>
+                                {categories.map(element =>
+                                    <div key={element} className={styles.searchElement} onClick={() => selectCategory(element)}>{element}</div> )}
+                            </ul>
+                        </nav>}
+                    </div>
                     <label>Märksõnad </label> <br />
                     <div>
                         <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={dropdown}/> 
                         <Button className={styles.keywordBtn} variant='outline-light' size='sm' onClick={addNewKeyword}>Lisa märksõna</Button>
-                        {active && <nav className={styles.searchNav}>
+                        {keywordActive && <nav className={styles.searchNav}>
                             <ul>
                                 {keywords.map(element =>
                                     <div key={element} className={styles.searchElement} onClick={() => selectKeyword(element)}>{element}</div> )}

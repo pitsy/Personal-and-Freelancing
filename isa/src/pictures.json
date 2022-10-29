@@ -2,141 +2,181 @@
     {
         "id": 1,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/200/350/300",
-        "bigpicture": "https://picsum.photos/id/200/1500/800"
+        "bigpicture": "https://picsum.photos/id/200/1500/800",
+        "date": "2015-01-02",
+        "keywords": ["Moscow", "Kunst", "Pere"]
     },
     {
         "id": 2,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/201/350/300",
-        "bigpicture": "https://picsum.photos/id/201/1500/800"
+        "bigpicture": "https://picsum.photos/id/201/1500/800",
+        "date": "2016-01-02",
+        "keywords": ["Saaremaa", "Meri", "Pere"]
     },
     {
         "id": 3,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/202/350/300",
-        "bigpicture": "https://picsum.photos/id/202/1500/800"
+        "bigpicture": "https://picsum.photos/id/202/1500/800",
+        "date": "2015-07-02",
+        "keywords": ["Texas", "Loodus", "Pere"]
     },
     {
         "id": 4,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/203/350/300",
-        "bigpicture": "https://picsum.photos/id/203/1500/800"
+        "bigpicture": "https://picsum.photos/id/203/1500/800",
+        "date": "2017-01-12",
+        "keywords": ["Moscow", "Meri", "Saaremaa"]
     },
     {
         "id": 5,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/204/350/300",
-        "bigpicture": "https://picsum.photos/id/204/1500/800"
+        "bigpicture": "https://picsum.photos/id/204/1500/800",
+        "date": "2015-11-05",
+        "keywords": ["Moscow", "Kunst", "Pere"]
     },
     {
         "id": 6,
         "name": "abc",
-        "category": "a",
+        "category": "Cities",
         "thumbnail": "https://picsum.photos/id/215/350/300",
-        "bigpicture": "https://picsum.photos/id/215/1500/800"
+        "bigpicture": "https://picsum.photos/id/215/1500/800",
+        "date": "2019-05-02",
+        "keywords": ["Kamchatka", "Saaremaa", "Pere"]
     },
     {
         "id": 7,
         "name": "abc",
-        "category": "a",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/218/350/300",
-        "bigpicture": "https://picsum.photos/id/218/1500/800"
+        "bigpicture": "https://picsum.photos/id/218/1500/800",
+        "date": "2005-07-02",
+        "keywords": ["Loodus", "Kunst", "Meri"]
     },
     {
         "id": 8,
         "name": "abc",
-        "category": "a",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/217/350/300",
-        "bigpicture": "https://picsum.photos/id/217/1500/800"
+        "bigpicture": "https://picsum.photos/id/217/1500/800",
+        "date": "2016-08-02",
+        "keywords": ["Saaremaa", "Kamchatka", "Texas"]
     },
     {
         "id": 9,
         "name": "abc",
-        "category": "a",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/208/350/300",
-        "bigpicture": "https://picsum.photos/id/208/1500/800"
+        "bigpicture": "https://picsum.photos/id/208/1500/800",
+        "date": "2019-01-03",
+        "keywords": ["Moscow", "Meri", "Kamchatka"]
     },
     {
         "id": 10,
         "name": "abc",
-        "category": "a",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/209/350/300",
-        "bigpicture": "https://picsum.photos/id/209/1500/800"
+        "bigpicture": "https://picsum.photos/id/209/1500/800",
+        "date": "2020-01-02",
+        "keywords": ["Texas", "Kunst", "Pere"]
     },
     {
         "id": 11,
         "name": "abc",
-        "category": "b",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/200/350/300",
-        "bigpicture": "https://picsum.photos/id/200/1500/800"
+        "bigpicture": "https://picsum.photos/id/200/1500/800",
+        "date": "2015-01-01",
+        "keywords": ["Moscow", "Kunst", "Kamchatka"]
     },
     {
         "id": 12,
         "name": "abc",
-        "category": "b",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/201/350/300",
-        "bigpicture": "https://picsum.photos/id/201/1500/800"
+        "bigpicture": "https://picsum.photos/id/201/1500/800",
+        "date": "2012-01-22",
+        "keywords": ["Saaremaa", "Meri", "Pere"]
     },
     {
         "id": 13,
         "name": "abc",
-        "category": "b",
+        "category": "Landscapes",
         "thumbnail": "https://picsum.photos/id/202/350/300",
-        "bigpicture": "https://picsum.photos/id/202/1500/800"
+        "bigpicture": "https://picsum.photos/id/202/1500/800",
+        "date": "2014-11-12",
+        "keywords": ["Moscow", "Kamchatka", "Meri"]
     },
     {
         "id": 14,
         "name": "abc",
-        "category": "b",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/203/350/300",
-        "bigpicture": "https://picsum.photos/id/203/1500/800"
+        "bigpicture": "https://picsum.photos/id/203/1500/800",
+        "date": "2017-08-22",
+        "keywords": ["Kamchatka", "Loodus", "Texas"]
     },
     {
         "id": 15,
         "name": "abc",
-        "category": "b",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/204/350/300",
-        "bigpicture": "https://picsum.photos/id/204/1500/800"
+        "bigpicture": "https://picsum.photos/id/204/1500/800",
+        "date": "2016-09-15",
+        "keywords": ["Moscow", "Kunst", "Pere"]
     },
     {
         "id": 16,
         "name": "abc",
-        "category": "c",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/215/350/300",
-        "bigpicture": "https://picsum.photos/id/215/1500/800"
+        "bigpicture": "https://picsum.photos/id/215/1500/800",
+        "date": "2013-01-17",
+        "keywords": ["Loodus", "Kunst", "Kamchatka"]
     },
     {
         "id": 17,
         "name": "abc",
-        "category": "c",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/218/350/300",
-        "bigpicture": "https://picsum.photos/id/218/1500/800"
+        "bigpicture": "https://picsum.photos/id/218/1500/800",
+        "date": "2015-17-02",
+        "keywords": ["Moscow", "Kunst", "Pere"]
     },
     {
         "id": 18,
         "name": "abc",
-        "category": "c",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/217/350/300",
-        "bigpicture": "https://picsum.photos/id/217/1500/800"
+        "bigpicture": "https://picsum.photos/id/217/1500/800",
+        "date": "2015-18-12",
+        "keywords": ["Kamchatka", "Meri", "Loodus"]
     },
     {
         "id": 19,
         "name": "abc",
-        "category": "c",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/208/350/300",
-        "bigpicture": "https://picsum.photos/id/208/1500/800"
+        "bigpicture": "https://picsum.photos/id/208/1500/800",
+        "date": "2021-01-02",
+        "keywords": ["Meri", "Kunst", "Texas"]
     },
     {
         "id": 20,
         "name": "abc",
-        "category": "c",
+        "category": "Museums",
         "thumbnail": "https://picsum.photos/id/209/350/300",
-        "bigpicture": "https://picsum.photos/id/209/1500/800"
+        "bigpicture": "https://picsum.photos/id/209/1500/800",
+        "date": "2021-11-02",
+        "keywords": ["Saaremaa", "Kamchatka", "Pere"]
     }
 ]

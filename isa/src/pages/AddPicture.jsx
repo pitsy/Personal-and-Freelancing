@@ -12,6 +12,7 @@ function AddPicture() {
     const bigPictureRef = useRef();
     const categoryRef = useRef();
     const keywordRef = useRef();
+    const dateRef = useRef();
 
     const [pictures, setPictures] = useState([]);
     const [defaultId, setDefaultId] = useState('');
@@ -23,7 +24,9 @@ function AddPicture() {
     const [dbKeywords, setDbKeywords] = useState([]);
     const [keywords, setKeywords] = useState([]);
     const [selectedKeywords, setSelectedKeywords] = useState([]);
-    const [active, setActive] = useState(false);
+    const [keywordActive, setKeywordActive] = useState(false);
+    const [categoryActive, setCategoryActive] = useState(false);
+    const categories = [...new Set(pictures.map(e => e.category))].sort();
 
     useEffect(() => {
         fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
@@ -51,8 +54,9 @@ function AddPicture() {
         const idNotFilled = checkIfFilled(idRef, 'ID on täitmata');
         const nameNotFilled = checkIfFilled(nameRef, 'Nimi on täitmata');
         const categoryNotFilled = checkIfFilled(categoryRef, 'Kategooria on täitmata');
+        const dateNotFilled = checkIfFilled(dateRef, 'Kuupäev on täitmata');
         
-        if (idNotFilled || nameNotFilled || categoryNotFilled) {
+        if (idNotFilled || nameNotFilled || categoryNotFilled || dateNotFilled) {
             return;
         } else if(selectedKeywords.lenght === 0) { 
             setMessage('Märksõnad on täitmata');
@@ -64,6 +68,7 @@ function AddPicture() {
             name: nameRef.current.value,
             thumbnail: showImage === 'url' ? thumbnailRef.current.value : thumbnail,
             bigpicture: showImage === 'url' ? bigPictureRef.current.value : bigPicture,
+            date: dateRef.current.value,
             category: categoryRef.current.value,
             keywords: selectedKeywords,
         }
@@ -76,6 +81,11 @@ function AddPicture() {
         idRef.current.value = '';
         nameRef.current.value = '';
         categoryRef.current.value = '';
+        dateRef.current.value = '';
+        thumbnailRef.current.value = '';
+        bigPictureRef.current.value = '';
+        setSelectedKeywords([]);
+        setMessage('');
         // add toast
     }
 
@@ -117,8 +127,16 @@ function AddPicture() {
         setSelectedKeywords(selectedKeywords.slice());
     }
 
-    function dropdown() {
-        setActive(true);
+    function selectCategory(element) {
+        categoryRef.current.value = element;
+    }
+
+    function dropdown(value) {
+        if (value === 1) {
+            setKeywordActive(true);
+        } else if (value === 2) {
+            setCategoryActive(true);
+        }        
     }
 
     return ( 
@@ -158,15 +176,24 @@ function AddPicture() {
             {showImage === 'upload' && <div>Thumbnail</div> }
             {showImage === 'upload' && <FileUpload onSendPictureUrl={setThumbnail}/>}
             {showImage === 'upload' && <div>Suur pilt</div> }
-            {showImage === 'upload' && <FileUpload onSendPictureUrl={setBigPicture}/>} 
-            <br />
+            {showImage === 'upload' && <FileUpload onSendPictureUrl={setBigPicture}/>}
+            <label>Kuupäev </label> <br />
+            <input ref={dateRef} type="text" placeholder="YYYY-MM-DD" /> <br />
             <label>Kategooria </label> <br />
-            <input ref={categoryRef} type="text" /> <br /> 
+            <div>
+                <input ref={categoryRef} type="text" onClick={() => dropdown(2)}/> 
+                {categoryActive && <nav className={styles.categorySearchNav}>
+                    <ul>
+                        {categories.map(element =>
+                            <div key={element} className={styles.searchElement} onClick={() => selectCategory(element)}>{element}</div> )}
+                    </ul>
+                </nav>}
+            </div>
             <label>Märksõnad </label> <br />
             <div>
-                <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={dropdown}/> 
+                <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={() => dropdown(1)}/> 
                 <Button className={styles.keywordBtn} variant='outline-light' size='sm' onClick={addNewKeyword}>Lisa märksõna</Button>
-                {active && <nav className={styles.searchNav}>
+                {keywordActive && <nav className={styles.searchNav}>
                     <ul>
                         {keywords.map(element =>
                             <div key={element} className={styles.searchElement} onClick={() => selectKeyword(element)}>{element}</div> )}
@@ -181,6 +208,7 @@ function AddPicture() {
             )}
             <br /> <br />
             <Button variant='outline-primary' size='lg' disabled={!idUnique} onClick={addNewPicture}>Add picture</Button>
+            <br /> <br />
         </div> );
 }
 

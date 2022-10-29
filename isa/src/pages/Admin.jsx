@@ -84,7 +84,13 @@ function Admin() {
                 <div key={element.id}>
                     <Card className={styles.image} style={{ width: '18rem' }} bg='light'>
                         <Card.Img src={element.thumbnail} alt={element.name} />
-                        <Card.Text>ID: {element.id} Nimi: {element.name} Kategooria: {element.category} Märksõnad: {element.keywords}</Card.Text>
+                        <Card.Text>
+                            ID: {element.id} | 
+                            Nimi: {element.name} | 
+                            Kategooria: {element.category} | 
+                            Märksõnad: {element.keywords} | 
+                            Kuupäev: {element.date}
+                        </Card.Text>
                         <ButtonGroup>
                             <Button variant='outline-primary' onClick={() => saveKeywords(element.keywords)}><Link to={'/edit-picture/' + element.id}>Edit</Link></Button>
                             <Button variant='outline-danger' onClick={() => alert(element)}>Delete</Button>
