@@ -65,7 +65,8 @@ function EditPicture() {
             thumbnail: pictureFound.thumbnail,
             bigpicture: pictureFound.bigpicture,
             category: categoryRef.current.value,
-            keywords: selectedKeywords
+            keywords: selectedKeywords,
+            date: dateRef.current.value
         }
 
         pictures[index] = newPicture;
@@ -154,7 +155,7 @@ function EditPicture() {
                     </div>
                     <label>Märksõnad </label> <br />
                     <div>
-                        <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={dropdown}/> 
+                        <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={() => dropdown(1)}/> 
                         <Button className={styles.keywordBtn} variant='outline-light' size='sm' onClick={addNewKeyword}>Lisa märksõna</Button>
                         {keywordActive && <nav className={styles.searchNav}>
                             <ul>

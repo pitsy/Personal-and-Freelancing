@@ -92,7 +92,12 @@ function Admin() {
                             Kuupäev: {element.date}
                         </Card.Text>
                         <ButtonGroup>
-                            <Button variant='outline-primary' onClick={() => saveKeywords(element.keywords)}><Link to={'/edit-picture/' + element.id}>Edit</Link></Button>
+                            <Button 
+                                variant='outline-primary' 
+                                onClick={() => saveKeywords(element.keywords)}
+                                href={'/edit-picture/' + element.id}>
+                                    Edit
+                            </Button>
                             <Button variant='outline-danger' onClick={() => alert(element)}>Delete</Button>
                         </ButtonGroup>
                     </Card>
