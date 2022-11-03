@@ -12,6 +12,7 @@ import { useContext, useEffect } from 'react';
 import EditPicture from './pages/EditPicture';
 import { useState } from 'react';
 import CategoryGallery from './pages/CategoryGallery';
+import ManageKeywords from './pages/ManageKeywords';
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
       <Card className='category-card' border='light'>
         <ListGroup variant='flush'>
           <ListGroup.Item >
-            <div><h2 className='nav-header'>Your brand</h2></div>
+            <div><h2 className='nav-header'>Allan Pits</h2></div>
           </ListGroup.Item>
           <ListGroup.Item>
             <div><Link className='nav-element' to='/'>Homepage</Link></div>
@@ -50,6 +51,14 @@ function App() {
           <ListGroup.Item>
             <div><Link className='nav-element' to='/contact'>Contact</Link></div>
           </ListGroup.Item>
+          { authCtx.isLoggedIn && <>
+            <ListGroup.Item>
+              <div><Link className='nav-element' to='/admin'>Admin vaade</Link></div>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <div><Link className='nav-element' to='/admin/manage-keywords'>Halda märksõnu</Link></div>
+            </ListGroup.Item>
+          </> }
         </ListGroup>
       </Card>
 
@@ -77,6 +86,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path='edit-picture/:id' element={ <EditPicture /> } />
+        </Routes>
+        <Routes>
+          <Route path='admin/manage-keywords' element={ <ManageKeywords /> } />
         </Routes>
       </> }
     </div>
