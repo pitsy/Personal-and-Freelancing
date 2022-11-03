@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
+import styles from "../css/Admin.module.css";
+import { Button } from 'react-bootstrap';
 
 function ManageKeywords() {
 
@@ -66,7 +68,7 @@ function ManageKeywords() {
         const index = keywords.findIndex(element => element.toLowerCase() === keywordRef.current.value.toLowerCase());
         if (index >= 0) {
             setIsUnique(false);
-            setMessage('Märksõna on juba olema!');
+            setMessage('Märksõna on juba olemas!');
         } else {
             setIsUnique(true);
             setMessage('');
@@ -75,19 +77,29 @@ function ManageKeywords() {
 
     return ( <div className="page">
         <br />
-        <div>Halda märksõnu:</div>
+        <div><h3>Halda märksõnu</h3></div>
+        <br />
         <input type="text" ref={searchRef} onChange={searchKeywords} placeholder='Otsi märksõnu'/>
         <br /> <br />
+        { keywords.sort().map((element, index) => 
+            <span key={element}>
+                <span className={styles.keyword} key={element}>
+                    {element} 
+                    <button className={styles.keywordRemoveBtn} onClick={() => deleteKeyword(element, index)}>X</button>
+                </span> 
+            </span> )}
+        <br /> <br />
+        <input type="text" ref={keywordRef} onChange={checkKeywordUniqueness} placeholder='Uus märksõna'/>
+        <Button 
+            className={styles.keywordBtn}
+            variant="outline-light" 
+            size="sm" 
+            disabled={!isUnique} 
+            onClick={addNewKeyword}>
+                Lisa märksõna
+        </Button>
+        <br />
         <div>{message}</div>
-        <br />
-        { keywords.map((element, index) => 
-            <div key={element}>
-                <span>{element} </span>
-                <button onClick={() => deleteKeyword(element, index)}>x</button>
-            </div> )}
-        <br />
-        <input type="text" ref={keywordRef} onChange={checkKeywordUniqueness}/>
-        <button disabled={!isUnique} onClick={addNewKeyword}>Lisa märksõna</button>
     </div> );
 }
 

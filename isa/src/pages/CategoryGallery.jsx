@@ -88,6 +88,7 @@ function CategoryGallery() {
 
     return ( 
         <div className='page'>
+            <h2 className={styles.header}>{category}</h2>
             <div className={styles.searchContainer}>
                 {usedKeywords.map(element =>
                 // check if keyword has been selected before

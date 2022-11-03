@@ -20,6 +20,7 @@ function App() {
   const [active, setActive] = useState(false);
   const [pictures, setPictures] = useState([]);
   const categories = [...new Set(pictures.map(e => e.category))].sort();
+  const [categoryClicked, setCategoryClicked] = useState('');
 
   useEffect(() => {
     fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
@@ -32,7 +33,7 @@ function App() {
   return (
     <div>
       <Card className='category-card' border='light'>
-        <ListGroup variant='flush'>
+        <ListGroup>
           <ListGroup.Item >
             <div><h2 className='nav-header'>Allan Pits</h2></div>
           </ListGroup.Item>
@@ -42,10 +43,15 @@ function App() {
           <ListGroup.Item>
             <div><Link className='nav-element' onClick={() => setActive(!active)}>Photography</Link></div>
           </ListGroup.Item>
-          {active && 
-          categories.map(element => 
+          {active && categories.map(element => 
             <ListGroup.Item key={element}>
-              <div><Link className='nav-category' to={'/gallery/' + element}>{element}</Link></div>
+              <div className={categoryClicked === element ? 'category-active' : undefined}>
+                <Link 
+                  className='nav-category'
+                  to={'/gallery/' + element} 
+                  onClick={() => setCategoryClicked(element)}>
+                    {element}
+              </Link></div>
             </ListGroup.Item>
           )}
           <ListGroup.Item>
@@ -56,7 +62,7 @@ function App() {
               <div><Link className='nav-element' to='/admin'>Admin vaade</Link></div>
             </ListGroup.Item>
             <ListGroup.Item>
-              <div><Link className='nav-element' to='/admin/manage-keywords'>Halda märksõnu</Link></div>
+              <div><Link className='nav-category' to='/admin/manage-keywords'>Halda märksõnu</Link></div>
             </ListGroup.Item>
           </> }
         </ListGroup>
@@ -82,10 +88,10 @@ function App() {
           <Route path='admin' element={ <Admin /> } />
         </Routes>
         <Routes>
-          <Route path='add-picture' element={ <AddPicture /> } />
+          <Route path='admin/add-picture' element={ <AddPicture /> } />
         </Routes>
         <Routes>
-          <Route path='edit-picture/:id' element={ <EditPicture /> } />
+          <Route path='admin/edit-picture/:id' element={ <EditPicture /> } />
         </Routes>
         <Routes>
           <Route path='admin/manage-keywords' element={ <ManageKeywords /> } />

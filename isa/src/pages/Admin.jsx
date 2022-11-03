@@ -24,6 +24,7 @@ function Admin() {
             .then(res => res.json())
             .then(data => {
                 setPictures(data || []);
+                setFilteredPictures(data || []);
             });
     }, []);
 
@@ -122,7 +123,7 @@ function Admin() {
                 </span> )}
             {/* various buttons */}
             <div>
-                <Link to='/add-picture'>
+                <Link to='/admin/add-picture'>
                     <Button variant='outline-primary' size='lg' className={styles.categoryBtn}>Add picture</Button>
                 </Link>
                 <Button variant='outline-primary' size='lg' className={styles.logoutBtn} onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>
@@ -158,7 +159,7 @@ function Admin() {
                             <Button 
                                 variant='outline-primary' 
                                 onClick={() => saveKeywords(element.keywords)}
-                                href={'/edit-picture/' + element.id}>
+                                href={'/admin/edit-picture/' + element.id}>
                                     Edit
                             </Button>
                             <Button variant='outline-danger' onClick={() => alert(element)}>Delete</Button>

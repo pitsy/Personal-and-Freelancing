@@ -97,14 +97,11 @@
 }
 
 .searchContainer {
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-.searchBar {
-    width: 20%;
-    min-width: 250px;
-    border: none;
-    border-radius: 5px;
+.header {
+    margin-top: 45px;
 }
 
 .keywordBtn {
