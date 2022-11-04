@@ -92,7 +92,7 @@ function CategoryGallery() {
             <div className={styles.searchContainer}>
                 {usedKeywords.map(element =>
                 // check if keyword has been selected before
-                    <Button key={element} className={styles.keywordBtn} size='sm' variant='outline-light'
+                    <Button key={element} className={styles.keywordBtn} size='sm' variant='outline-dark'
                         onClick={() => searchKeyword(element)}>
                             {element}
                     </Button>
@@ -103,7 +103,7 @@ function CategoryGallery() {
                         key={element}
                         className={styles.keywordBtn}
                         size='sm'
-                        variant='light'
+                        variant='dark'
                         onClick={() => searchKeyword(element)}>
                             {element}
                     </Button>)}

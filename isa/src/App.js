@@ -38,7 +38,7 @@ function App() {
             <div><h2 className='nav-header'>Allan Pits</h2></div>
           </ListGroup.Item>
           <ListGroup.Item>
-            <div><Link className='nav-element' to='/'>Homepage</Link></div>
+            <div onClick={() => setCategoryClicked('')}><Link className='nav-element' to='/'>Homepage</Link></div>
           </ListGroup.Item>
           <ListGroup.Item>
             <div><Link className='nav-element' onClick={() => setActive(!active)}>Photography</Link></div>
@@ -47,7 +47,7 @@ function App() {
             <ListGroup.Item key={element}>
               <div className={categoryClicked === element ? 'category-active' : undefined}>
                 <Link 
-                  className='nav-category'
+                  className={categoryClicked === element ? 'nav-category-active' : 'nav-category'}
                   to={'/gallery/' + element} 
                   onClick={() => setCategoryClicked(element)}>
                     {element}
@@ -55,7 +55,7 @@ function App() {
             </ListGroup.Item>
           )}
           <ListGroup.Item>
-            <div><Link className='nav-element' to='/contact'>Contact</Link></div>
+            <div onClick={() => setCategoryClicked('')}><Link className='nav-element' to='/contact'>Contact</Link></div>
           </ListGroup.Item>
           { authCtx.isLoggedIn && <>
             <ListGroup.Item>
