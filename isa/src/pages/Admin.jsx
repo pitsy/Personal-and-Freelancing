@@ -131,7 +131,7 @@ function Admin() {
             {/* keyword selection */}
             <div>
                 {usedKeywords.map(element => 
-                    <Button className={styles.mapKeywordBtn} key={element} size='sm' variant='outline-light'
+                    <Button className={styles.mapKeywordBtn} key={element} size='sm' variant='outline-dark'
                     onClick={() => searchKeyword(element)}>
                         {element}
                     </Button> )}
@@ -152,7 +152,7 @@ function Admin() {
                             ID: {element.id} | 
                             Nimi: {element.name} | 
                             Kategooria: {element.category} | 
-                            Märksõnad: {element.keywords} | 
+                            Märksõnad: {element.keywords.join(', ')} | 
                             Kuupäev: {element.date}
                         </Card.Text>
                         <ButtonGroup>

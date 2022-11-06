@@ -1,7 +1,7 @@
 
 .category-card {
     position: sticky;
-    width: 17%;
+    width: 18%;
     margin: 0;
     padding: 0;
     top: 0;
@@ -23,16 +23,16 @@
 }
 
 .nav-category {
-    margin-left: 40px;
+    margin: 5px 0 5px 40px;
     font-weight: 300;
     background: none;
-    font-size: 102%;
+    font-size: 110%;
 }
 
 .nav-element {
     font-weight: 500;
-    font-size: 105%;
-    margin-left: 20px;
+    font-size: 120%;
+    margin: 10px 0 10px 20px;
 }
 
 .nav-element, .nav-category, .nav-category-active {
@@ -40,23 +40,19 @@
     color: rgb(255, 255, 255);
     /* padding: 8px 16px; */
     text-decoration: none;
-    margin-bottom: 5px;
 }
 
-.nav-element:hover, .nav-category:hover {
+.nav-element:hover, .nav-category:hover, .nav-category-active:hover {
     color: rgb(185, 185, 185);
 }
 
 .nav-category-active {
-    color: black;
-    margin-left: 40px;
+    color: rgb(255, 255, 255);
+    margin: 5px 0 5px 40px;    
     font-weight: 300;
     background: none;
-    font-size: 102%;
-}
-
-.nav-category-active:hover {
-    color: black;
+    font-size: 110%;
+    text-decoration: underline;
 }
 
 .nav-header {
@@ -64,12 +60,6 @@
     color: white;
     font-weight: 600;
     font-size: 240%;
-}
-
-.category-active {
-    background-color: #d1d1d1;
-    box-shadow: 0 0 1px 1px #d1d1d1;
-    border-radius: 5px;
 }
 
 .background-image {

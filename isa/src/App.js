@@ -13,6 +13,7 @@ import EditPicture from './pages/EditPicture';
 import { useState } from 'react';
 import CategoryGallery from './pages/CategoryGallery';
 import ManageKeywords from './pages/ManageKeywords';
+import ManageCategories from './pages/ManageCategories';
 
 function App() {
 
@@ -45,7 +46,7 @@ function App() {
           </ListGroup.Item>
           {active && categories.map(element => 
             <ListGroup.Item key={element}>
-              <div className={categoryClicked === element ? 'category-active' : undefined}>
+              <div>
                 <Link 
                   className={categoryClicked === element ? 'nav-category-active' : 'nav-category'}
                   to={'/gallery/' + element} 
@@ -59,10 +60,13 @@ function App() {
           </ListGroup.Item>
           { authCtx.isLoggedIn && <>
             <ListGroup.Item>
-              <div><Link className='nav-element' to='/admin'>Admin vaade</Link></div>
+              <div  onClick={() => setCategoryClicked('')}><Link className='nav-element' to='/admin'>Admin vaade</Link></div>
             </ListGroup.Item>
             <ListGroup.Item>
-              <div><Link className='nav-category' to='/admin/manage-keywords'>Halda märksõnu</Link></div>
+              <div  onClick={() => setCategoryClicked('')}><Link className='nav-category' to='/admin/manage-keywords'>Halda märksõnu</Link></div>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <div  onClick={() => setCategoryClicked('')}><Link className='nav-category' to='/admin/manage-categories'>Halda kategooriaid</Link></div>
             </ListGroup.Item>
           </> }
         </ListGroup>
@@ -95,6 +99,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path='admin/manage-keywords' element={ <ManageKeywords /> } />
+        </Routes>
+        <Routes>
+          <Route path='admin/manage-categories' element={ <ManageCategories /> } />
         </Routes>
       </> }
     </div>

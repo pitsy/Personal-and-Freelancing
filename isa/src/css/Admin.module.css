@@ -17,10 +17,6 @@
     margin: 20px 20px 20px 0;
 }
 
-.categoryBtn b {
-    color: rgb(255, 255, 255);
-}
-
 .mapKeywordBtn {
     margin: 0 15px 20px 0;
     border-radius: 10px;
@@ -45,7 +41,7 @@
 
 .keyword {
     margin: 2px 20px 0 0;
-    border: 1px solid white;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 5px;
     display: inline-block;
     padding: 3px;
@@ -53,19 +49,28 @@
 }
 
 .keywordRemoveBtn {
-    position: relative;
-    background-color: transparent;
-    color: white;
-    border-radius: 6px;
     border: none;
-    padding: 1px 6px;
     scale: 0.9;
 }
 
-.keywordRemoveBtn:hover {
-    background-color: white;
+.keywordRemoveBtn, .categoryRemoveBtn {
+    position: relative;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border-radius: 6px;
+    padding: 1px 6px;
+    margin-left: 5px;
+}
+
+.keywordRemoveBtn:hover, .categoryRemoveBtn:hover {
+    background-color: rgb(168, 168, 168);
     opacity: 0.9;
     color: black;
+}
+
+.categoryRemoveBtn {
+    border: 1px solid black;
+    margin-bottom: 6px;
 }
 
 .searchNav ul {
