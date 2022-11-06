@@ -20,14 +20,22 @@ function App() {
   const authCtx = useContext(AuthContext);
   const [active, setActive] = useState(false);
   const [pictures, setPictures] = useState([]);
-  const categories = [...new Set(pictures.map(e => e.category))].sort();
+  // const categories = [...new Set(pictures.map(e => e.category))].sort();
   const [categoryClicked, setCategoryClicked] = useState('');
+  const [categories, setCategories] = useState([]);
+  const publicCategories = categories.filter(element => element.public === true);
+  const [privateCategories, setPrivateCategories] = useState([]);
 
   useEffect(() => {
     fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
         .then(res => res.json())
         .then(data => {
             setPictures(data || []);
+        });
+    fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/categories.json')
+        .then(res => res.json())
+        .then(data => {
+            setCategories(data || []);
         });
   }, []);
   
@@ -44,14 +52,23 @@ function App() {
           <ListGroup.Item>
             <div><Link className='nav-element' onClick={() => setActive(!active)}>Photography</Link></div>
           </ListGroup.Item>
-          {active && categories.map(element => 
-            <ListGroup.Item key={element}>
-              <div>
-                <Link 
-                  className={categoryClicked === element ? 'nav-category-active' : 'nav-category'}
-                  to={'/gallery/' + element} 
-                  onClick={() => setCategoryClicked(element)}>
-                    {element}
+          {active && categories.filter(element => element.public === true).map(element => 
+            <ListGroup.Item key={element.category}>
+              <div><Link 
+                className={categoryClicked === element.category ? 'nav-category-active' : 'nav-category'}
+                to={'/gallery/' + element.category} 
+                onClick={() => setCategoryClicked(element.category)}>
+                  {element.category}
+              </Link></div>
+            </ListGroup.Item>
+          )}
+          {active && authCtx.isLoggedIn && categories.filter(element => element.public === false).map(element => 
+            <ListGroup.Item key={element.category}>
+              <div><Link 
+                className={categoryClicked === element.category ? 'nav-category-active' : 'nav-category'}
+                to={'/gallery/' + element.category} 
+                onClick={() => setCategoryClicked(element.category)}>
+                  {element.category}
               </Link></div>
             </ListGroup.Item>
           )}

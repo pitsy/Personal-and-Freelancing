@@ -10,6 +10,10 @@ function ManageCategories() {
     const newCategoryRef = useRef();
     // set the Private (false) / Public (true) status of categories
     const [status, setStatus] = useState(false)
+    // ref for changing category name 
+    const nameRef = useRef();
+    // save name of selected category
+    const [categorySelected, setCategorySelected] = useState('none');
 
     useEffect(() => {
         fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json')
@@ -54,6 +58,27 @@ function ManageCategories() {
         saveChanges();
     }
 
+    function changeName() {
+        // find index in categories array and update
+        const index = allCategories.findIndex(element => element.category === categorySelected);
+        allCategories[index].category = nameRef.current.value;
+        setAllCategories(allCategories.slice());
+        saveChanges();
+        // change category name in pictures array
+        for (let i = 0; i < pictures.length; i++) {
+            if (pictures[i].category === categorySelected) {
+                pictures[i].category = nameRef.current.value;
+            }
+        }
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/pictures.json', {
+            method: 'PUT',
+            body: JSON.stringify(pictures)
+        });
+        // reset after completing function
+        nameRef.current.value = '';
+        setCategorySelected('none');
+    }
+
     return ( 
         <div className="page">
             <br />
@@ -73,15 +98,23 @@ function ManageCategories() {
             { allCategories.sort().map((element, index) => 
             <div key={index}>
                 <span>{element.category}</span>
+                <button className={styles.categoryRemoveBtn} onClick={() => setCategorySelected(element.category)}>Muuda nime</button>
                 <button className={styles.categoryRemoveBtn} onClick={() => changeStatus(index)}>{element.public ? 'Avalik' : 'Privaatne'}</button>
                 <button className={styles.categoryRemoveBtn} onClick={() => deleteCategory(index)}>X</button>
             </div> )}
+            {categorySelected !== 'none' && 
+                <div>
+                    <br />
+                    <input type="text" ref={nameRef} placeholder={categorySelected}/> 
+                    <button className={styles.categoryRemoveBtn} onClick={changeName}>Uuenda nime</button>
+                </div>
+            }
             <br /> 
             <div><b>Lisa kategooria:</b></div> 
             <br />
             <input type="text" ref={newCategoryRef} placeholder='Uus kategooria'/>
             <button className={styles.categoryRemoveBtn} onClick={() => setStatus(!status)}>{status ? 'Avalik' : 'Privaatne'}</button>
-            <button className={styles.categoryRemoveBtn} onClick={addCategory}>Lisa</button>
+            <button className={styles.categoryRemoveBtn} onClick={addCategory}>Lisa</button>            
         </div> );
 }
 
