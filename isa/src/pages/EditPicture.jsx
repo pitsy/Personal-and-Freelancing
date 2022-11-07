@@ -20,7 +20,7 @@ function EditPicture() {
     const [keywords, setKeywords] = useState([]);
     const [keywordActive, setKeywordActive] = useState(false);
     const [categoryActive, setCategoryActive] = useState(false);
-    const categories = [...new Set(pictures.map(e => e.category))].sort();
+    const [categories, setCategories] = useState([]);
 
     const pictureFound = pictures.find(element => element.id === Number(id));
     const index = pictures.indexOf(pictureFound);
@@ -37,6 +37,11 @@ function EditPicture() {
             .then(data => {
                 setKeywords(data || []);
                 setDbKeywords(data || []);
+            });
+        fetch('https://isaleht-7a2e8-default-rtdb.europe-west1.firebasedatabase.app/categories.json')
+            .then(res => res.json())
+            .then(data => {
+                setCategories(data || []);
             });
     }, []);
 
@@ -149,7 +154,11 @@ function EditPicture() {
                         {categoryActive && <nav className={styles.categorySearchNav}>
                             <ul>
                                 {categories.map(element =>
-                                    <div key={element} className={styles.searchElement} onClick={() => selectCategory(element)}>{element}</div> )}
+                                    <div key={element.category} 
+                                        className={styles.searchElement} 
+                                        onClick={() => selectCategory(element.category)}>
+                                            {element.category}
+                                    </div> )}
                             </ul>
                         </nav>}
                     </div>

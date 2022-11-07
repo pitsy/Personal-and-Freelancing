@@ -17,6 +17,11 @@
     margin: 20px 20px 20px 0;
 }
 
+.uiGroup {
+    border-top: 1px solid rgb(116, 116, 116);
+    margin-right: 1.5%;
+}
+
 .mapKeywordBtn {
     margin: 0 15px 20px 0;
     border-radius: 10px;
@@ -25,9 +30,7 @@
 .logoutBtn {
     position: relative;
     float: right;
-    margin-right: 80px;
-    top: 50%;
-    transform: translate(0, 43%);
+    margin: 20px 0;
 }
 
 .alertBtn {

@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
 import styles from '../css/Admin.module.css';
-import { Card, Button, ButtonGroup, Alert } from 'react-bootstrap';
+import { Card, Button, ButtonGroup, Alert, ToggleButton } from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import AuthContext from "../components/AuthContext";
+import { useRef } from 'react';
 
 function Admin() {
 
@@ -13,6 +14,9 @@ function Admin() {
     const authCtx = useContext(AuthContext);
     const [showAlert, setShowAlert] = useState(false);
     const [tempPicId, setTempPicId] = useState('');
+    const [sort, setSort] = useState('');
+
+    const dateSearchRef = useRef();
 
     // keyword variables
     let receivedKeywords = [];
@@ -44,6 +48,7 @@ function Admin() {
             setFilteredPictures(result);
             setActiveCategory(categoryClicked);
         }
+        dateSearchRef.current.value = '';
     }
 
     function deletePicture() {
@@ -102,6 +107,32 @@ function Admin() {
         }
     }
 
+    // sort pictures by the most recent date first
+    function sortDateDesc() {
+        setSort('newer');
+        filteredPictures.sort((a,b) => Number(b.date.replaceAll('-','')) - Number(a.date.replaceAll('-','')));
+        setFilteredPictures(filteredPictures.slice());
+    }
+
+    // sort pictures by the oldest date first
+    function sortDateAsc() {
+        setSort('older');
+        filteredPictures.sort((a,b) => Number(a.date.replaceAll('-','')) - Number(b.date.replaceAll('-','')));
+        setFilteredPictures(filteredPictures.slice());
+    }
+
+    // search and filter pictures by the date
+    function searchByDate() {
+        // filter pictures
+        let result = pictures.filter(element =>
+            element.date.replaceAll('-','').includes(dateSearchRef.current.value.replaceAll('-','')));
+        if (activeCategory !== 'all') {
+            result.filter(element => element.category === activeCategory);
+            console.log('smth');
+        }
+        setFilteredPictures(result);
+    }
+
     return ( 
         <div className='page'>
             {/* alert to confirm/cancel picture delete */}
@@ -113,8 +144,8 @@ function Admin() {
                 </div>                
             </Alert>
             {/* map buttons for categories */}
-            <span className={styles.categoryBtn}><b>Categories:</b></span>
-            <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>all</Button>
+            <span className={styles.categoryBtn}><b>Kategooriad:</b></span>
+            <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>kõik</Button>
             {categories.map(category => 
                 <span key={category}>
                     <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory(category)}>
@@ -122,11 +153,30 @@ function Admin() {
                     </Button>
                 </span> )}
             {/* various buttons */}
-            <div>
+            <div className={styles.uiGroup}>
                 <Link to='/admin/add-picture'>
-                    <Button variant='outline-primary' size='lg' className={styles.categoryBtn}>Add picture</Button>
+                    <Button variant='outline-success' className={styles.categoryBtn}>Lisa pilt</Button>
                 </Link>
-                <Button variant='outline-primary' size='lg' className={styles.logoutBtn} onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>
+                <span className={styles.categoryBtn}><b>Sorteeri:</b></span>
+                <ButtonGroup className={styles.categoryBtn}>
+                    <ToggleButton 
+                        id="older" 
+                        type="radio" 
+                        variant='outline-primary'
+                        checked={sort === 'older'}
+                        onChange={sortDateAsc}
+                        name="radio" value="older">Vanemad enne</ToggleButton>
+                    <ToggleButton 
+                        id="newer" 
+                        type="radio" 
+                        variant='outline-primary'
+                        checked={sort === 'newer'}
+                        onClick={sortDateDesc}
+                        name="radio" value="newer">Uuemad enne</ToggleButton>
+                </ButtonGroup>
+                <span className={styles.categoryBtn}><b>Kuupäev:</b></span>
+                <input type="text" ref={dateSearchRef} placeholder='YYYY-MM-DD' onChange={searchByDate}/>
+                <Button variant='outline-danger' className={styles.logoutBtn} onClick={() => authCtx.updateLoggedIn(false)}>Log out</Button>
             </div>
             {/* keyword selection */}
             <div>
@@ -137,7 +187,7 @@ function Admin() {
                     </Button> )}
                 {selectedKeywords.map(element => 
                 <Button
-                    key={element} className={styles.mapKeywordBtn} size='sm' variant='light'
+                    key={element} className={styles.mapKeywordBtn} size='sm' variant='dark'
                     onClick={() => searchKeyword(element)}>
                         {element}
                 </Button>)}
