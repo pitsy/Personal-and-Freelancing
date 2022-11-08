@@ -37,7 +37,7 @@
 
 .nav-element, .nav-category, .nav-category-active {
     display: block;
-    color: rgb(255, 255, 255);
+    color: #fdf9f4;
     /* padding: 8px 16px; */
     text-decoration: none;
 }
@@ -47,7 +47,7 @@
 }
 
 .nav-category-active {
-    color: rgb(255, 255, 255);
+    color: #fdf9f4;
     margin: 5px 0 5px 40px;    
     font-weight: 300;
     background: none;
@@ -57,7 +57,7 @@
 
 .nav-header {
     margin: 55px 0 40px 20px;
-    color: white;
+    color: #fdf9f4;
     font-weight: 600;
     font-size: 240%;
 }

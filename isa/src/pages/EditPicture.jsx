@@ -183,6 +183,7 @@ function EditPicture() {
                     <Button disabled={!idUnique} onClick={updatePicture} variant='outline-primary'>Muuda pilti</Button>
                 </div>}
                 { pictureFound === undefined && <div>Pilti ei leitud</div> }
+                <br /><br />
         </div> );
 }
 

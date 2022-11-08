@@ -167,8 +167,7 @@ function CategoryGallery() {
             </div>
             { imgActive && <div className={styles.popup}>
                 <div className={styles.topBar}>
-                    <p>{pictures[pictureIndex].name}</p>
-                    {authCtx.isLoggedIn && <p>{pictures[pictureIndex].date}</p>}
+                    <div>{pictures[pictureIndex].name}{authCtx.isLoggedIn && <span className={styles.date}>{pictures[pictureIndex].date}</span> }</div>
                     <img onClick={() => setImgActive(false)} className={styles.closeBtn} src={require('../images/close.png')} alt="" />
                 </div>
                 <img onClick={nextImage} className={styles.rightBtn} src={require('../images/arrow.png')} alt="" />
@@ -180,8 +179,8 @@ function CategoryGallery() {
             <div className={styles.gridContainer}>
                 {pictures.map((element, index) =>
                     <div key={element.id}>
-                        <Card onClick={() => setActivePicture(index)} className={styles.image} style={{ width: '18rem' }} bg='light'>
-                            <Card.Img src={element.thumbnail} alt={element.name} />
+                        <Card onClick={() => setActivePicture(index)} className={styles.imageCard}>
+                            <Card.Img src={element.thumbnail} className={styles.image} alt={element.name} />
                         </Card>
                     </div> )}    
             </div>

@@ -209,8 +209,8 @@ function Admin() {
             <div className={styles.gridContainer}>
             {filteredPictures.map(element =>
                 <div key={element.id}>
-                    <Card className={styles.image} style={{ width: '18rem' }} bg='light'>
-                        <Card.Img src={element.thumbnail} alt={element.name} />
+                    <Card className={styles.imageCard}>
+                        <Card.Img className={styles.image} src={element.thumbnail} alt={element.name} />
                         <Card.Text>
                             ID: {element.id} | 
                             Nimi: {element.name} | 
