@@ -110,3 +110,12 @@
     margin-right: 10px;
     border-radius: 10px;
 }
+
+.categoryBtn {
+    margin: 20px 20px 20px 0;
+}
+
+.uiGroup {
+    border-bottom: 1px solid rgb(116, 116, 116);
+    margin-right: 1.5%;
+}

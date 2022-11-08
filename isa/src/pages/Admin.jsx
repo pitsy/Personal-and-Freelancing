@@ -38,6 +38,18 @@ function Admin() {
         setUsedKeywords([...new Set(receivedKeywords)].sort());
     }, [filteredPictures]);
 
+    useEffect(() => {
+        // maintain selected sorting methods or date search after category change
+        if (sort === 'newer') {
+            sortDateDesc();
+        } else if (sort === 'older') {
+            sortDateAsc();
+        }
+        if (dateSearchRef.current.value !== '') {
+            searchByDate();
+        }
+    }, [activeCategory]);
+
     function filterByCategory(categoryClicked) {
         setSelectedKeywords([]);
         if (categoryClicked === 'all') {
@@ -48,7 +60,6 @@ function Admin() {
             setFilteredPictures(result);
             setActiveCategory(categoryClicked);
         }
-        dateSearchRef.current.value = '';
     }
 
     function deletePicture() {
@@ -124,13 +135,15 @@ function Admin() {
     // search and filter pictures by the date
     function searchByDate() {
         // filter pictures
-        let result = pictures.filter(element =>
+        const result = pictures.filter(element =>
             element.date.replaceAll('-','').includes(dateSearchRef.current.value.replaceAll('-','')));
-        if (activeCategory !== 'all') {
-            result.filter(element => element.category === activeCategory);
-            console.log('smth');
-        }
         setFilteredPictures(result);
+        // filter again based on category selected
+        if (activeCategory !== 'all') {
+            setFilteredPictures(currentPictures => {
+                return currentPictures.filter(element => element.category === activeCategory);
+            })
+        }
     }
 
     return ( 

@@ -1,14 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styles from '../css/Photography.module.css';
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button,ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import AuthContext from '../components/AuthContext';
 
 function CategoryGallery() {
     const [pictures, setPictures] = useState([]);
     const [dbPictures, setDbPictures] = useState([]);
     const [pictureIndex, setPictureIndex] = useState(0);
     const [imgActive, setImgActive] = useState(false);
-    // const [selectedKeywords, setSelectedKeywords] = useState([]);
+    const [sort, setSort] = useState('');
+    const authCtx = useContext(AuthContext);
+
+    const dateSearchRef = useRef();
 
     const {category} = useParams(); // useParams always comes as a string
 
@@ -27,8 +31,11 @@ function CategoryGallery() {
     }, []);
 
     useEffect(() => {
+        // filter pictures based on category and reset values ()
         setPictures(dbPictures.filter(element => element.category === category));
         setSelectedKeywords([]);
+        setSort('');
+        dateSearchRef.current.value = '';
     }, [category, dbPictures]);
 
     useEffect(() => {
@@ -86,9 +93,58 @@ function CategoryGallery() {
         }
     }
 
+    // sort pictures by the most recent date first
+    function sortDateDesc() {
+        setSort('newer');
+        pictures.sort((a,b) => Number(b.date.replaceAll('-','')) - Number(a.date.replaceAll('-','')));
+        setPictures(pictures.slice());
+    }
+
+    // sort pictures by the oldest date first
+    function sortDateAsc() {
+        setSort('older');
+        pictures.sort((a,b) => Number(a.date.replaceAll('-','')) - Number(b.date.replaceAll('-','')));
+        setPictures(pictures.slice());
+    }
+
+    // search and filter pictures by the date
+    function searchByDate() {
+        // filter pictures
+        const result = dbPictures.filter(element =>
+            element.date.replaceAll('-','').includes(dateSearchRef.current.value.replaceAll('-','')));
+        setPictures(result);
+        // filter again based on category selected
+        setPictures(currentPictures => {
+            return currentPictures.filter(element => element.category === category);
+        })
+    }
+
     return ( 
         <div className='page'>
             <h2 className={styles.header}>{category}</h2>
+            { authCtx.isLoggedIn && 
+                <div className={styles.uiGroup}>
+                    <span className={styles.categoryBtn}><b>Sorteeri:</b></span>
+                    <ButtonGroup className={styles.categoryBtn}>
+                        <ToggleButton 
+                            id="older" 
+                            type="radio" 
+                            variant='outline-primary'
+                            checked={sort === 'older'}
+                            onChange={sortDateAsc}
+                            name="radio" value="older">Vanemad enne</ToggleButton>
+                        <ToggleButton 
+                            id="newer" 
+                            type="radio" 
+                            variant='outline-primary'
+                            checked={sort === 'newer'}
+                            onClick={sortDateDesc}
+                            name="radio" value="newer">Uuemad enne</ToggleButton>
+                    </ButtonGroup>
+                    <span className={styles.categoryBtn}><b>Kuupäev:</b></span>
+                    <input type="text" ref={dateSearchRef} placeholder='YYYY-MM-DD' onChange={searchByDate}/>
+                </div>
+            }
             <div className={styles.searchContainer}>
                 {usedKeywords.map(element =>
                 // check if keyword has been selected before
@@ -112,6 +168,7 @@ function CategoryGallery() {
             { imgActive && <div className={styles.popup}>
                 <div className={styles.topBar}>
                     <p>{pictures[pictureIndex].name}</p>
+                    {authCtx.isLoggedIn && <p>{pictures[pictureIndex].date}</p>}
                     <img onClick={() => setImgActive(false)} className={styles.closeBtn} src={require('../images/close.png')} alt="" />
                 </div>
                 <img onClick={nextImage} className={styles.rightBtn} src={require('../images/arrow.png')} alt="" />
