@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import imageMapResize from 'image-map-resizer';
-import { Button } from 'react-bootstrap';
 import coupe2 from './images/Coupe 2/Coupe 2.png';
 import coupe2_broken from './images/Coupe 2/Coupe 2_broken.png';
 import front from './images/Coupe 2/front.png';
@@ -11,9 +10,12 @@ import rear from './images/Coupe 2/rear.png';
 function App() {
 
   const [message, setMessage] = useState('');
+  const [brokenWindows, setBrokenWindows] = useState([]);
 
   function selectWindow(windowClicked) {
     setMessage(windowClicked);
+    brokenWindows.push(windowClicked);
+    setBrokenWindows(brokenWindows.slice());
   }
 
   useEffect(() => {
@@ -23,7 +25,11 @@ function App() {
   return (
     <div>
       <div className="container">
-        <Button>{message}</Button>
+        <div className='button-container'>
+          {brokenWindows.map(element =>
+            <button key={element} className='window-button'>{element}</button>
+          )}
+        </div>
         <img className="image" src={coupe2} alt="" usemap="#image-map" />
         {/* <img className='broken-glass' src={front} alt="" />
         <img className='broken-glass' src={l_1} alt="" />

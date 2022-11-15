@@ -27,6 +27,11 @@ area:hover {
   cursor: pointer;
 }
 
-.page {
-  display: flex;
+.button-container {
+  width: 80%;
+  margin: 30px 50px 20px 50px;
+}
+
+.window-button {
+  margin: 0 10px 15px 0;
 }
