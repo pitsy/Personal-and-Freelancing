@@ -27,11 +27,49 @@ area:hover {
   cursor: pointer;
 }
 
+.selection-layer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  transform: scaleY(0.95) scaleX(0.96) translate(0, -2.1%);
+  z-index: 98;
+  opacity: 0;
+}
+
 .button-container {
   width: 80%;
   margin: 30px 50px 20px 50px;
+  display: flex;
+  justify-content: center;
 }
 
-.window-button {
+.window-button-active {
   margin: 0 10px 15px 0;
+  font-weight: bold;
+}
+
+.window-button-inactive {
+  margin: 0 10px 15px 0;
+  background: none;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.popup {
+  position: absolute;
+  z-index: 99;
+}
+
+.popup-button {
+  margin: 10px;
 }
