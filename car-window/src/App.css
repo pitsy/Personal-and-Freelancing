@@ -9,18 +9,16 @@
   position: relative;
   width: 100%;
   object-fit: cover;
+  opacity: 0.2;
 }
 
 .broken-glass {
   position: absolute;
-  top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
-  /* transform: rotate(-90deg) scale(1.27) translate(-0.8rem, 0); */
-  z-index: -1;
-  object-fit: cover;
+  transform: scaleY(1.18) scaleX(1.265) translate(0, -0.35%);
+  z-index: 97;
 }
 
 area:hover {

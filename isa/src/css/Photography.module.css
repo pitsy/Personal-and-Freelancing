@@ -100,6 +100,7 @@
 .largeImage {
     margin-top: 2%;
     width: 70%;
+    max-width: 1500px;
     height: auto;
     max-height: 92vh;
     object-fit: contain;

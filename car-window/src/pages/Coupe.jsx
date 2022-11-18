@@ -4,9 +4,6 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import coupeTinted from '../images/Coupe/Coupe 2.png';
 import coupe from '../images/Coupe/Coupe 3.png';
-import front from '../images/Coupe/front.png';
-import l_1 from '../images/Coupe/l_1.png';
-import rear from '../images/Coupe/rear.png';
 
 function Coupe() {
 
@@ -95,8 +92,9 @@ function Coupe() {
 
                 {/* transparent layer on top of all car-related images to maintain image map */}
                 <img className="selection-layer" src={coupe} alt="" usemap="#image-map" />
+
+                {/* broken glass displays */}
                 {/* <img className='broken-glass' src={front} alt="" />
-                <img className='broken-glass' src={l_1} alt="" />
                 <img className='broken-glass' src={rear} alt="" /> */}
 
                 <map name="image-map">

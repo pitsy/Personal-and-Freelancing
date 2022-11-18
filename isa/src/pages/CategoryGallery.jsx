@@ -35,7 +35,7 @@ function CategoryGallery() {
         setPictures(dbPictures.filter(element => element.category === category));
         setSelectedKeywords([]);
         setSort('');
-        dateSearchRef.current.value = '';
+        // dateSearchRef.current.value = '';
     }, [category, dbPictures]);
 
     useEffect(() => {
