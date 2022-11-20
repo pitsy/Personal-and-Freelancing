@@ -4,6 +4,17 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import coupeTinted from '../images/Coupe/Coupe 2.png';
 import coupe from '../images/Coupe/Coupe 3.png';
+import front from '../images/Coupe/front.png';
+import rear from '../images/Coupe/rear.png';
+import r_1 from '../images/Coupe/r_1.png';
+import r_2 from '../images/Coupe/r_2.png';
+import r_3 from '../images/Coupe/r_3.png';
+import l_1 from '../images/Coupe/l_1.png';
+import l_2 from '../images/Coupe/l_2.png';
+import l_3 from '../images/Coupe/l_3.png';
+import rear_t from '../images/Coupe/rear_t.png';
+import l_3_t from '../images/Coupe/l_3_t.png';
+import r_3_t from '../images/Coupe/r_3_t.png';
 
 function Coupe() {
 
@@ -15,23 +26,37 @@ function Coupe() {
     const [popupConfirm, setPopupConfirm] = useState(false);
     // array of possible window selections for Coupe
     const [brokenWindows, setBrokenWindows] = useState([
-        {window: 'front', broken: false},
-        {window: 'rear', broken: false},
-        {window: 'l_1', broken: false},
-        {window: 'l_2', broken: false},
-        {window: 'l_3', broken: false},
-        {window: 'r_1', broken: false},
-        {window: 'r_2', broken: false},
-        {window: 'r_3', broken: false}
+        {window: 'front', broken: false, source: front},
+        {window: 'rear', broken: false, source: rear},
+        {window: 'l_1', broken: false, source: l_1},
+        {window: 'l_2', broken: false, source: l_2},
+        {window: 'l_3', broken: false, source: l_3},
+        {window: 'r_1', broken: false, source: r_1},
+        {window: 'r_2', broken: false, source: r_2},
+        {window: 'r_3', broken: false, source: r_3},
+        {window: 'rear_t', broken: false, source: rear_t},
+        {window: 'r_3_t', broken: false, source: r_3_t},
+        {window: 'l_3_t', broken: false, source: l_3_t}
     ]);
 
     // handle window selection
     function selectWindow(windowClicked) {
-        const index = brokenWindows.findIndex(element => element.window === windowClicked);
+        let index = 0;
+        // special cases for tinted windows
+        if (windowClicked === 'r_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_3_t');
+        } else if (windowClicked === 'l_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_3_t');
+        } else if (windowClicked === 'rear' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'rear_t');
+        } else {
+            index = brokenWindows.findIndex(element => element.window === windowClicked);
+        }
         brokenWindows[index].broken = !brokenWindows[index].broken;
         setBrokenWindows(windows => {
             return windows.slice();
-        })
+        })        
+        // display popup if a window which can be tinted is clicked for the first time
         if (!popupConfirm && (windowClicked === 'rear' || windowClicked === 'r_3' || windowClicked === 'l_3')) {
             setPopup(true);
         }
@@ -47,6 +72,10 @@ function Coupe() {
     function tintedButtonHandle() {
         setTinted(!tinted);
         setPopupConfirm(true);
+        for (let i = 0; i < brokenWindows.length; i++) {
+            brokenWindows[i].broken = false;            
+        }
+        setBrokenWindows(brokenWindows.slice());
     }
 
     // necessary to maintain proper image map scaling
@@ -58,16 +87,16 @@ function Coupe() {
         <div className='page'>
             {/* display popup */}
             <div className='popup'>
-            <Alert show={popup} variant="secondary">
-                <Alert.Heading>Are your back windows tinted?</Alert.Heading>
-                <div className="d-flex justify-content-center">
-                <Button className='popup-button' onClick={() => handlePopup(true)} variant="outline-dark">
-                    Yes
-                </Button>
-                <Button className='popup-button' onClick={() => handlePopup(false)} variant="outline-dark">
-                    No
-                </Button>
-                </div>
+                <Alert show={popup} variant="secondary">
+                    <Alert.Heading>Are your back windows tinted?</Alert.Heading>
+                    <div className="d-flex justify-content-center">
+                    <Button className='popup-button' onClick={() => handlePopup(true)} variant="outline-dark">
+                        Yes
+                    </Button>
+                    <Button className='popup-button' onClick={() => handlePopup(false)} variant="outline-dark">
+                        No
+                    </Button>
+                    </div>
                 </Alert>
             </div>
 
@@ -90,12 +119,17 @@ function Coupe() {
                 {tinted && <img className="image" src={coupeTinted} alt="" />}
                 {!tinted && <img className="image" src={coupe} alt="" />}
 
+                {/* broken glass displays */}
+                {brokenWindows.filter(element => element.broken === true).map(element => 
+                    <img 
+                        key={element.window} 
+                        // image scaling wonky so windows need different css classes
+                        className={(element.name === 'front' || element.name === 'r_1' || element.name === 'l_1') ? 'broken-glass' : 'broken-glass2'} 
+                        src={element.source} alt="" />
+                )}
+
                 {/* transparent layer on top of all car-related images to maintain image map */}
                 <img className="selection-layer" src={coupe} alt="" usemap="#image-map" />
-
-                {/* broken glass displays */}
-                {/* <img className='broken-glass' src={front} alt="" />
-                <img className='broken-glass' src={rear} alt="" /> */}
 
                 <map name="image-map">
                     <area onClick={() => selectWindow("front")} alt="front" title="front" coords="783,860,739,712,844,646,998,620,1160,650,1258,710,1219,865" shape="poly" />
