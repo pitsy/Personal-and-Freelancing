@@ -12,7 +12,7 @@
   z-index: 3;
 }
 
-.broken-glass, .broken-glass2 {
+.broken-glass, .broken-glass2, .bg3, .bg4 {
   position: absolute;
   left: 0;
   right: 0;
@@ -21,12 +21,14 @@
   object-fit: cover;
 }
 
+/* used in Coupe */
 .broken-glass {
-  transform: scaleX(0.9) scaleY(0.85) translateY(-3.5%);
+  transform: scaleX(0.89) scaleY(0.89) translateY(-2.4%);
 }
 
-.broken-glass2 {
-  transform: scaleX(0.9) scaleY(0.9) translateY(-2.4%);
+/* used in Sedan */
+.bg3 {
+  transform: scaleX(0.955) scaleY(0.955) translateY(-2.43%) translateX(0.01%);
 }
 
 area:hover {

@@ -72,6 +72,7 @@ function Coupe() {
     function tintedButtonHandle() {
         setTinted(!tinted);
         setPopupConfirm(true);
+        // reset all windows to not broken to avoid issues
         for (let i = 0; i < brokenWindows.length; i++) {
             brokenWindows[i].broken = false;            
         }
@@ -122,10 +123,7 @@ function Coupe() {
                 {/* broken glass displays */}
                 {brokenWindows.filter(element => element.broken === true).map(element => 
                     <img 
-                        key={element.window} 
-                        // image scaling wonky so windows need different css classes
-                        className={(element.name === 'front' || element.name === 'r_1' || element.name === 'l_1') ? 'broken-glass' : 'broken-glass2'} 
-                        src={element.source} alt="" />
+                        key={element.window} className='broken-glass' src={element.source} alt="" />
                 )}
 
                 {/* transparent layer on top of all car-related images to maintain image map */}
