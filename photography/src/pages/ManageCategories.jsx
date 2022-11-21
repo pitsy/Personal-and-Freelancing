@@ -82,9 +82,9 @@ function ManageCategories() {
     return ( 
         <div className="page">
             <br />
-            <div><h3>Halda kategooriaid</h3></div>
+            <div><h3>Maintain categories</h3></div>
             <br />
-            <div><b>Kasutuses kategooriad:</b></div> 
+            <div><b>Used categories:</b></div> 
             <br />
             { usedCategories.sort().map(element => 
             <div key={element}>
@@ -93,13 +93,13 @@ function ManageCategories() {
                 </span> 
             </div> )}
             <br /> 
-            <div><b>Kõik kategooriad:</b></div> 
+            <div><b>All categories:</b></div> 
             <br />
             { allCategories.sort().map((element, index) => 
             <div key={index}>
                 <span>{element.category}</span>
-                <button className={styles.categoryRemoveBtn} onClick={() => setCategorySelected(element.category)}>Muuda nime</button>
-                <button className={styles.categoryRemoveBtn} onClick={() => changeStatus(index)}>{element.public ? 'Avalik' : 'Privaatne'}</button>
+                <button className={styles.categoryRemoveBtn} onClick={() => setCategorySelected(element.category)}>Change name</button>
+                <button className={styles.categoryRemoveBtn} onClick={() => changeStatus(index)}>{element.public ? 'Public' : 'Private'}</button>
                 <button className={styles.categoryRemoveBtn} onClick={() => deleteCategory(index)}>X</button>
             </div> )}
             {categorySelected !== 'none' && 
@@ -110,11 +110,11 @@ function ManageCategories() {
                 </div>
             }
             <br /> 
-            <div><b>Lisa kategooria:</b></div> 
+            <div><b>Add new category:</b></div> 
             <br />
-            <input type="text" ref={newCategoryRef} placeholder='Uus kategooria'/>
-            <button className={styles.categoryRemoveBtn} onClick={() => setStatus(!status)}>{status ? 'Avalik' : 'Privaatne'}</button>
-            <button className={styles.categoryRemoveBtn} onClick={addCategory}>Lisa</button>            
+            <input type="text" ref={newCategoryRef} placeholder='New category'/>
+            <button className={styles.categoryRemoveBtn} onClick={() => setStatus(!status)}>{status ? 'Public' : 'Private'}</button>
+            <button className={styles.categoryRemoveBtn} onClick={addCategory}>Add</button>            
         </div> );
 }
 

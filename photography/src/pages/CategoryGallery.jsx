@@ -1,7 +1,9 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../css/Photography.module.css';
 import { Card, Button,ButtonGroup, ToggleButton } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import AuthContext from '../components/AuthContext';
+import { useContext } from 'react';
 
 function CategoryGallery() {
     const [pictures, setPictures] = useState([]);
@@ -9,7 +11,7 @@ function CategoryGallery() {
     const [pictureIndex, setPictureIndex] = useState(0);
     const [imgActive, setImgActive] = useState(false);
     const [sort, setSort] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const authCtx = useContext(AuthContext);
 
     const dateSearchRef = useRef();
 
@@ -121,9 +123,9 @@ function CategoryGallery() {
     return ( 
         <div className='page'>
             <h2 className={styles.header}>{category}</h2>
-            { isLoggedIn && 
+            { authCtx.isLoggedIn && 
                 <div className={styles.uiGroup}>
-                    <span className={styles.categoryBtn}><b>Sorteeri:</b></span>
+                    <span className={styles.categoryBtn}><b>Sort:</b></span>
                     <ButtonGroup className={styles.categoryBtn}>
                         <ToggleButton 
                             id="older" 
@@ -131,16 +133,16 @@ function CategoryGallery() {
                             variant='outline-primary'
                             checked={sort === 'older'}
                             onChange={sortDateAsc}
-                            name="radio" value="older">Vanemad enne</ToggleButton>
+                            name="radio" value="older">Date ascending</ToggleButton>
                         <ToggleButton 
                             id="newer" 
                             type="radio" 
                             variant='outline-primary'
                             checked={sort === 'newer'}
                             onClick={sortDateDesc}
-                            name="radio" value="newer">Uuemad enne</ToggleButton>
+                            name="radio" value="newer">Date descending</ToggleButton>
                     </ButtonGroup>
-                    <span className={styles.categoryBtn}><b>Kuupäev:</b></span>
+                    <span className={styles.categoryBtn}><b>Date:</b></span>
                     <input type="text" ref={dateSearchRef} placeholder='YYYY-MM-DD' onChange={searchByDate}/>
                 </div>
             }
@@ -166,7 +168,7 @@ function CategoryGallery() {
             </div>
             { imgActive && <div className={styles.popup}>
                 <div className={styles.topBar}>
-                    <div>{pictures[pictureIndex].name}{isLoggedIn && <span className={styles.date}>{pictures[pictureIndex].date}</span> }</div>
+                    <div>{pictures[pictureIndex].name}{authCtx.isLoggedIn && <span className={styles.date}>{pictures[pictureIndex].date}</span> }</div>
                     <img onClick={() => setImgActive(false)} className={styles.closeBtn} src={require('../images/close.png')} alt="" />
                 </div>
                 <img onClick={nextImage} className={styles.rightBtn} src={require('../images/arrow.png')} alt="" />

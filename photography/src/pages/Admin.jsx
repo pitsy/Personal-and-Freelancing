@@ -149,15 +149,15 @@ function Admin() {
         <div className='page'>
             {/* alert to confirm/cancel picture delete */}
             <Alert show={showAlert}>
-                <Alert.Heading>Tahad sa kindlasti selle pildi kustutada?</Alert.Heading>
+                <Alert.Heading>Are you sure you want to delete this picture?</Alert.Heading>
                 <div>
-                    <Button variant='outline-primary' className={styles.alertBtn} onClick={deletePicture}>Jah kustuta</Button> 
-                    <Button variant='outline-primary' className={styles.alertBtn} onClick={() => setShowAlert(false)}>Ei</Button>
+                    <Button variant='outline-primary' className={styles.alertBtn} onClick={deletePicture}>Delete</Button> 
+                    <Button variant='outline-primary' className={styles.alertBtn} onClick={() => setShowAlert(false)}>Cancel</Button>
                 </div>                
             </Alert>
             {/* map buttons for categories */}
-            <span className={styles.categoryBtn}><b>Kategooriad:</b></span>
-            <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>kõik</Button>
+            <span className={styles.categoryBtn}><b>Categories:</b></span>
+            <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory('all')}>All</Button>
             {categories.map(category => 
                 <span key={category}>
                     <Button variant='outline-primary' size='sm' className={styles.categoryBtn} onClick={() => filterByCategory(category)}>
@@ -167,9 +167,9 @@ function Admin() {
             {/* various buttons */}
             <div className={styles.uiGroup}>
                 <Link to='/admin/add-picture'>
-                    <Button variant='outline-success' className={styles.categoryBtn}>Lisa pilt</Button>
+                    <Button variant='outline-success' className={styles.categoryBtn}>Add new picture</Button>
                 </Link>
-                <span className={styles.categoryBtn}><b>Sorteeri:</b></span>
+                <span className={styles.categoryBtn}><b>Sort:</b></span>
                 <ButtonGroup className={styles.categoryBtn}>
                     <ToggleButton 
                         id="older" 
@@ -177,16 +177,16 @@ function Admin() {
                         variant='outline-primary'
                         checked={sort === 'older'}
                         onChange={sortDateAsc}
-                        name="radio" value="older">Vanemad enne</ToggleButton>
+                        name="radio" value="older">Date ascending</ToggleButton>
                     <ToggleButton 
                         id="newer" 
                         type="radio" 
                         variant='outline-primary'
                         checked={sort === 'newer'}
                         onClick={sortDateDesc}
-                        name="radio" value="newer">Uuemad enne</ToggleButton>
+                        name="radio" value="newer">Date descending</ToggleButton>
                 </ButtonGroup>
-                <span className={styles.categoryBtn}><b>Kuupäev:</b></span>
+                <span className={styles.categoryBtn}><b>Date:</b></span>
                 <input type="text" ref={dateSearchRef} placeholder='YYYY-MM-DD' onChange={searchByDate}/>
                 <Button variant='outline-danger' className={styles.logoutBtn} onClick={() => setIsLoggedIn(false)}>Log out</Button>
             </div>
@@ -212,10 +212,10 @@ function Admin() {
                         <Card.Img className={styles.image} src={element.thumbnail} alt={element.name} />
                         <Card.Text>
                             ID: {element.id} | 
-                            Nimi: {element.name} | 
-                            Kategooria: {element.category} | 
-                            Märksõnad: {element.keywords.join(', ')} | 
-                            Kuupäev: {element.date}
+                            Name: {element.name} | 
+                            Category: {element.category} | 
+                            Keywords: {element.keywords.join(', ')} | 
+                            Date: {element.date}
                         </Card.Text>
                         <ButtonGroup>
                             <Button 

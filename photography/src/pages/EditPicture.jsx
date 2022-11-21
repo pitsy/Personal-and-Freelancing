@@ -53,14 +53,14 @@ function EditPicture() {
     }
 
     function updatePicture() {
-        const idNotFilled = checkIfFilled(idRef, 'ID on täitmata');
-        const nameNotFilled = checkIfFilled(nameRef, 'Nimi on täitmata');
-        const categoryNotFilled = checkIfFilled(categoryRef, 'Kategooria on täitmata');
+        const idNotFilled = checkIfFilled(idRef, 'ID not filled');
+        const nameNotFilled = checkIfFilled(nameRef, 'Name not filled');
+        const categoryNotFilled = checkIfFilled(categoryRef, 'Category not filled');
 
         if (idNotFilled || nameNotFilled || categoryNotFilled) {
             return;
         } else if(selectedKeywords.lenght === 0) { 
-            setMessage('Märksõnad on täitmata');
+            setMessage('Keywords not filled');
             return;
         }
 
@@ -85,7 +85,7 @@ function EditPicture() {
         const index = pictures.findIndex(element => element.id === Number(idRef.current.value));
         if (index >= 0 && pictureFound.id !== Number(idRef.current.value)) {
             setIdUnique(false);
-            setMessage('Sisestasid mitteunikaalse ID!');
+            setMessage('ID not unique!');
         } else {
             setIdUnique(true);
             setMessage('');
@@ -139,16 +139,16 @@ function EditPicture() {
                 <div>
                     <label className="white-text">ID </label> <br />
                     <input onChange={checkIdUniqueness} ref={idRef} defaultValue={pictureFound.id} type="number" /> <br />
-                    <label className="white-text">Nimi </label> <br />
+                    <label className="white-text">Name </label> <br />
                     <input ref={nameRef} defaultValue={pictureFound.name} type="text" /> <br /> 
-                    <label className="white-text">Pilt </label> <br />
+                    <label className="white-text">Image </label> <br />
                     <div>
                         <img src={pictureFound.thumbnail} alt="" />
                     </div>
                     <br />
-                    <label>Kuupäev </label> <br />
+                    <label>Date </label> <br />
                     <input ref={dateRef} type="text" defaultValue={pictureFound.date} /> <br />
-                    <label>Kategooria </label> <br />
+                    <label>Category </label> <br />
                     <div>
                         <input ref={categoryRef} type="text" onClick={() => dropdown(2)} defaultValue={pictureFound.category}/> 
                         {categoryActive && <nav className={styles.categorySearchNav}>
@@ -162,10 +162,10 @@ function EditPicture() {
                             </ul>
                         </nav>}
                     </div>
-                    <label>Märksõnad </label> <br />
+                    <label>Keywords </label> <br />
                     <div>
                         <input ref={keywordRef} type="text" onChange={searchKeywords} onClick={() => dropdown(1)}/> 
-                        <Button className={styles.keywordBtn} variant='outline-light' size='sm' onClick={addNewKeyword}>Lisa märksõna</Button>
+                        <Button className={styles.keywordBtn} variant='outline-dark' size='sm' onClick={addNewKeyword}>Add new keyword</Button>
                         {keywordActive && <nav className={styles.searchNav}>
                             <ul>
                                 {keywords.map(element =>
@@ -180,9 +180,9 @@ function EditPicture() {
                         </span> 
                     )}
                     <br /> <br />
-                    <Button disabled={!idUnique} onClick={updatePicture} variant='outline-primary'>Muuda pilti</Button>
+                    <Button disabled={!idUnique} onClick={updatePicture} variant='outline-primary'>Edit picture</Button>
                 </div>}
-                { pictureFound === undefined && <div>Pilti ei leitud</div> }
+                { pictureFound === undefined && <div>Picture not found</div> }
                 <br /><br />
         </div> );
 }

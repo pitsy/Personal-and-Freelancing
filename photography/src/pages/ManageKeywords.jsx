@@ -68,7 +68,7 @@ function ManageKeywords() {
         const index = keywords.findIndex(element => element.toLowerCase() === keywordRef.current.value.toLowerCase());
         if (index >= 0) {
             setIsUnique(false);
-            setMessage('Märksõna on juba olemas!');
+            setMessage('Keyword already exists!');
         } else {
             setIsUnique(true);
             setMessage('');
@@ -77,9 +77,9 @@ function ManageKeywords() {
 
     return ( <div className="page">
         <br />
-        <div><h3>Halda märksõnu</h3></div>
+        <div><h3>Maintain keywords</h3></div>
         <br />
-        <input type="text" ref={searchRef} onChange={searchKeywords} placeholder='Otsi märksõnu'/>
+        <input type="text" ref={searchRef} onChange={searchKeywords} placeholder='Search keywords'/>
         <br /> <br />
         { keywords.sort().map((element, index) => 
             <span key={element}>
@@ -89,14 +89,14 @@ function ManageKeywords() {
                 </span> 
             </span> )}
         <br /> <br />
-        <input type="text" ref={keywordRef} onChange={checkKeywordUniqueness} placeholder='Uus märksõna'/>
+        <input type="text" ref={keywordRef} onChange={checkKeywordUniqueness} placeholder='New keyword'/>
         <Button 
             className={styles.keywordBtn}
-            variant="outline-light" 
+            variant="outline-dark" 
             size="sm" 
             disabled={!isUnique} 
             onClick={addNewKeyword}>
-                Lisa märksõna
+                Add new keyword
         </Button>
         <br />
         <div>{message}</div>
