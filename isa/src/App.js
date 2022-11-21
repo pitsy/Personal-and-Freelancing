@@ -44,7 +44,7 @@ function App() {
       <Card className='category-card' border='light'>
         <ListGroup>
           <ListGroup.Item >
-            <div><h2 className='nav-header'>Name Photography</h2></div>
+            <div><h2 className='nav-header'>Allan Pits Photography</h2></div>
           </ListGroup.Item>
           <ListGroup.Item>
             <div onClick={() => setCategoryClicked('')}><Link className='nav-element' to='/'>Homepage</Link></div>

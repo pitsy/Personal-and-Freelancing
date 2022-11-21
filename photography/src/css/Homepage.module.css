@@ -1,0 +1,18 @@
+
+.imgContainer {
+    height: 100vh;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+}
+
+.image {
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    margin: auto;
+}
+
+.homepage {
+    margin-left: 15%;
+}

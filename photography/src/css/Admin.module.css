@@ -1,0 +1,117 @@
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.image {
+    height: 240px;
+    width: 18rem;
+    object-fit: cover;
+    color: black;
+}
+
+.imageCard {
+    height: fit-content; 
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 18rem;
+    border: none;
+}
+
+.bigButtons {
+    width: 100%;
+}
+
+.categoryBtn {
+    margin: 20px 20px 20px 0;
+}
+
+.uiGroup {
+    border-top: 1px solid rgb(116, 116, 116);
+    margin-right: 1.5%;
+}
+
+.mapKeywordBtn {
+    margin: 0 15px 20px 0;
+    border-radius: 10px;
+}
+
+.logoutBtn {
+    position: relative;
+    float: right;
+    margin: 20px 0;
+}
+
+.alertBtn {
+    margin-left: 10px;
+}
+
+.keywordBtn {
+    margin-left: 20px;
+    transform: translate(0, -7%);
+}
+
+.keyword {
+    margin: 2px 20px 0 0;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    display: inline-block;
+    padding: 3px;
+    font-size: 14px;
+}
+
+.keywordRemoveBtn {
+    border: none;
+    scale: 0.9;
+}
+
+.keywordRemoveBtn, .categoryRemoveBtn {
+    position: relative;
+    background-color: transparent;
+    color: rgb(0, 0, 0);
+    border-radius: 6px;
+    padding: 1px 6px;
+    margin-left: 5px;
+}
+
+.keywordRemoveBtn:hover, .categoryRemoveBtn:hover {
+    background-color: rgb(168, 168, 168);
+    opacity: 0.9;
+    color: black;
+}
+
+.categoryRemoveBtn {
+    border: 1px solid black;
+    margin-bottom: 6px;
+}
+
+.searchNav ul {
+    margin-top: 5px;
+    height: 200px;
+    width: 100%;
+    max-width: 210px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.categorySearchNav ul {
+    margin-top: 5px;
+    height: 110px;
+    width: 100%;
+    max-width: 210px;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.searchElement {
+    margin-bottom: 3px;
+}
+
+.searchElement:hover {
+    background-color: rgb(97, 139, 255);
+    color: black;
+    cursor: pointer;
+}
