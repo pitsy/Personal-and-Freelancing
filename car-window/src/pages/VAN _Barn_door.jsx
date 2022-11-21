@@ -4,6 +4,27 @@ import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import vanBarnTinted from '../images/VAN_Barn/VAN Barn door 1.png';
 import vanBarn from '../images/VAN_Barn/VAN Barn door 2.png';
+import front from '../images/VAN_Barn/front.png';
+import r_rear from '../images/VAN_Barn/r_rear.png';
+import l_rear from '../images/VAN_Barn/l_rear.png';
+import r_rear_t from '../images/VAN_Barn/r_rear_t.png';
+import l_rear_t from '../images/VAN_Barn/l_rear_t.png';
+import r_1 from '../images/VAN_Barn/r_1.png';
+import r_2 from '../images/VAN_Barn/r_2.png';
+import r_3 from '../images/VAN_Barn/r_3.png';
+import r_4 from '../images/VAN_Barn/r_4.png';
+import l_1 from '../images/VAN_Barn/l_1.png';
+import l_2 from '../images/VAN_Barn/l_2.png';
+import l_3 from '../images/VAN_Barn/l_3.png';
+import l_4 from '../images/VAN_Barn/l_4.png';
+import l_3_t from '../images/VAN_Barn/l_3_t.png';
+import l_4_t from '../images/VAN_Barn/l_4_t.png';
+import r_3_t from '../images/VAN_Barn/r_3_t.png';
+import r_4_t from '../images/VAN_Barn/r_4_t.png';
+import l_5 from '../images/VAN_Barn/l_5.png';
+import r_5 from '../images/VAN_Barn/r_5.png';
+import l_5_t from '../images/VAN_Barn/l_5_t.png';
+import r_5_t from '../images/VAN_Barn/r_5_t.png';
 
 function Van_Barn_door() {
 
@@ -15,32 +36,62 @@ function Van_Barn_door() {
     const [popupConfirm, setPopupConfirm] = useState(false);
     // array of possible window selections for Sedan
     const [brokenWindows, setBrokenWindows] = useState([
-        {window: 'front', broken: false},
-        {window: 'l_rear', broken: false},
-        {window: 'r_rear', broken: false},
-        {window: 'l_1', broken: false},
-        {window: 'l_2', broken: false},
-        {window: 'l_3', broken: false},
-        {window: 'l_4', broken: false},
-        {window: 'l_5', broken: false},
-        {window: 'r_1', broken: false},
-        {window: 'r_2', broken: false},
-        {window: 'r_3', broken: false},
-        {window: 'r_4', broken: false},
-        {window: 'r_5', broken: false}
+        {window: 'front', broken: false, source: front},
+        {window: 'l_rear', broken: false, source: l_rear},
+        {window: 'r_rear', broken: false, source: r_rear},
+        {window: 'l_rear_t', broken: false, source: l_rear_t},
+        {window: 'r_rear_t', broken: false, source: r_rear_t},
+        {window: 'l_1', broken: false, source: l_1},
+        {window: 'l_2', broken: false, source: l_2},
+        {window: 'l_3', broken: false, source: l_3},
+        {window: 'l_4', broken: false, source: l_4},
+        {window: 'l_5', broken: false, source: l_5},
+        {window: 'l_3_t', broken: false, source: l_3_t},
+        {window: 'l_4_t', broken: false, source: l_4_t},
+        {window: 'l_5_t', broken: false, source: l_5_t},
+        {window: 'r_1', broken: false, source: r_1},
+        {window: 'r_2', broken: false, source: r_2},
+        {window: 'r_3', broken: false, source: r_3},
+        {window: 'r_4', broken: false, source: r_4},
+        {window: 'r_5', broken: false, source: r_5},
+        {window: 'r_3_t', broken: false, source: r_3_t},
+        {window: 'r_4_t', broken: false, source: r_4_t},
+        {window: 'r_5_t', broken: false, source: r_5_t}
     ]);
 
     // handle window selection
     function selectWindow(windowClicked) {
-        const index = brokenWindows.findIndex(element => element.window === windowClicked);
-        brokenWindows[index].broken = !brokenWindows[index].broken;
-        setBrokenWindows(windows => {
-            return windows.slice();
-        })
+        let index = 0;
+        // special cases for tinted windows
+        if (windowClicked === 'r_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_3_t');
+        } else if (windowClicked === 'l_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_3_t');
+        } else if (windowClicked === 'r_4' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_4_t');
+        } else if (windowClicked === 'l_4' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_4_t');
+        } else if (windowClicked === 'r_5' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_5_t');
+        } else if (windowClicked === 'l_5' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_5_t');
+        } else if (windowClicked === 'r_rear' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_rear_t');
+        } else if (windowClicked === 'l_rear' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_rear_t');
+        } else {
+            index = brokenWindows.findIndex(element => element.window === windowClicked);
+        }   
+        // display popup if a window which can be tinted is clicked for the first time
         if (!popupConfirm && (windowClicked === 'l_rear' || windowClicked === 'r_rear' || windowClicked === 'r_3' || windowClicked === 'l_3' || 
             windowClicked === 'r_4' || windowClicked === 'l_4' || windowClicked === 'r_5' || windowClicked === 'l_5')) {
             setPopup(true);
+            return; // don't allow back window selecting if popup is still active
         }
+        brokenWindows[index].broken = !brokenWindows[index].broken;
+        setBrokenWindows(windows => {
+            return windows.slice();
+        })     
     }
 
     function handlePopup(answer) {
@@ -53,6 +104,11 @@ function Van_Barn_door() {
     function tintedButtonHandle() {
         setTinted(!tinted);
         setPopupConfirm(true);
+        // reset all windows to not broken to avoid issues
+        for (let i = 0; i < brokenWindows.length; i++) {
+            brokenWindows[i].broken = false;            
+        }
+        setBrokenWindows(brokenWindows.slice());
     }
 
     // necessary to maintain proper image map scaling
@@ -95,6 +151,15 @@ function Van_Barn_door() {
                 {/* display either car with tinted windows or normal */}
                 {tinted && <img className="image" src={vanBarnTinted} alt="" />}
                 {!tinted && <img className="image" src={vanBarn} alt="" />}
+
+                {/* broken glass displays */}
+                {brokenWindows.filter(element => element.broken === true).map(element => 
+                    <img 
+                        key={element.window} 
+                        // image scaling wonky so windows need different css classes
+                        className='bg3' 
+                        src={element.source} alt="" />
+                )}
 
                 {/* transparent layer on top of all car-related images to maintain image map */}
                 <img className="selection-layer" src={vanBarn} alt="" usemap="#image-map" />

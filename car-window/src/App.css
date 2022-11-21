@@ -26,7 +26,7 @@
   transform: scaleX(0.89) scaleY(0.89) translateY(-2.4%);
 }
 
-/* used in Sedan */
+/* used in the rest of the cars */
 .bg3 {
   transform: scaleX(0.955) scaleY(0.955) translateY(-2.43%) translateX(0.01%);
 }

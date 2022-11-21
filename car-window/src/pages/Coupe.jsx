@@ -51,15 +51,16 @@ function Coupe() {
             index = brokenWindows.findIndex(element => element.window === 'rear_t');
         } else {
             index = brokenWindows.findIndex(element => element.window === windowClicked);
+        }     
+        // display popup if a window which can be tinted is clicked for the first time
+        if (!popupConfirm && (windowClicked === 'rear' || windowClicked === 'r_3' || windowClicked === 'l_3')) {
+            setPopup(true);
+            return; // don't allow back window selecting if popup is still active
         }
         brokenWindows[index].broken = !brokenWindows[index].broken;
         setBrokenWindows(windows => {
             return windows.slice();
-        })        
-        // display popup if a window which can be tinted is clicked for the first time
-        if (!popupConfirm && (windowClicked === 'rear' || windowClicked === 'r_3' || windowClicked === 'l_3')) {
-            setPopup(true);
-        }
+        })   
     }
 
     function handlePopup(answer) {

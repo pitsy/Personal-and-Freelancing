@@ -2,8 +2,27 @@ import { useEffect, useState } from 'react';
 import imageMapResize from 'image-map-resizer'; 
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-import vanTailgaterTinted from '../images/VAN_Tailgater/VAN Tailgater 3.png'; // tinted window version was not available
+import vanTailgaterTinted from '../images/VAN_Tailgater/BLAC VAN TAGLIATELE.png'; // tinted window version was not available
 import vanTailgater from '../images/VAN_Tailgater/VAN Tailgater 3.png';
+import front from '../images/VAN_Tailgater/front.png';
+import rear from '../images/VAN_Tailgater/rear.png';
+import rear_t from '../images/VAN_Tailgater/rear_t.png';
+import r_1 from '../images/VAN_Tailgater/r_1.png';
+import r_2 from '../images/VAN_Tailgater/r_2.png';
+import r_3 from '../images/VAN_Tailgater/r_3.png';
+import r_4 from '../images/VAN_Tailgater/r_4.png';
+import l_1 from '../images/VAN_Tailgater/l_1.png';
+import l_2 from '../images/VAN_Tailgater/l_2.png';
+import l_3 from '../images/VAN_Tailgater/l_3.png';
+import l_4 from '../images/VAN_Tailgater/l_4.png';
+import l_3_t from '../images/VAN_Tailgater/l_3_t.png';
+import l_4_t from '../images/VAN_Tailgater/l_4_t.png';
+import r_3_t from '../images/VAN_Tailgater/r_3_t.png';
+import r_4_t from '../images/VAN_Tailgater/r_4_t.png';
+import l_5 from '../images/VAN_Tailgater/l_5.png';
+import r_5 from '../images/VAN_Tailgater/r_5.png';
+import l_5_t from '../images/VAN_Tailgater/l_5_t.png';
+import r_5_t from '../images/VAN_Tailgater/r_5_t.png';
 
 function VAN_Tailgater() {
 
@@ -15,31 +34,58 @@ function VAN_Tailgater() {
     const [popupConfirm, setPopupConfirm] = useState(false);
     // array of possible window selections for Sedan
     const [brokenWindows, setBrokenWindows] = useState([
-        {window: 'front', broken: false},
-        {window: 'rear', broken: false},
-        {window: 'l_1', broken: false},
-        {window: 'l_2', broken: false},
-        {window: 'l_3', broken: false},
-        {window: 'l_4', broken: false},
-        {window: 'l_5', broken: false},
-        {window: 'r_1', broken: false},
-        {window: 'r_2', broken: false},
-        {window: 'r_3', broken: false},
-        {window: 'r_4', broken: false},
-        {window: 'r_5', broken: false}
+        {window: 'front', broken: false, source: front},
+        {window: 'rear', broken: false, source: rear},
+        {window: 'rear_t', broken: false, source: rear_t},
+        {window: 'l_1', broken: false, source: l_1},
+        {window: 'l_2', broken: false, source: l_2},
+        {window: 'l_3', broken: false, source: l_3},
+        {window: 'l_4', broken: false, source: l_4},
+        {window: 'l_5', broken: false, source: l_5},
+        {window: 'l_3_t', broken: false, source: l_3_t},
+        {window: 'l_4_t', broken: false, source: l_4_t},
+        {window: 'l_5_t', broken: false, source: l_5_t},
+        {window: 'r_1', broken: false, source: r_1},
+        {window: 'r_2', broken: false, source: r_2},
+        {window: 'r_3', broken: false, source: r_3},
+        {window: 'r_4', broken: false, source: r_4},
+        {window: 'r_5', broken: false, source: r_5},
+        {window: 'r_3_t', broken: false, source: r_3_t},
+        {window: 'r_4_t', broken: false, source: r_4_t},
+        {window: 'r_5_t', broken: false, source: r_5_t}
     ]);
 
     // handle window selection
     function selectWindow(windowClicked) {
-        const index = brokenWindows.findIndex(element => element.window === windowClicked);
+        let index = 0;
+        // special cases for tinted windows
+        if (windowClicked === 'r_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_3_t');
+        } else if (windowClicked === 'l_3' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_3_t');
+        } else if (windowClicked === 'r_4' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_4_t');
+        } else if (windowClicked === 'l_4' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_4_t');
+        } else if (windowClicked === 'r_5' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'r_5_t');
+        } else if (windowClicked === 'l_5' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'l_5_t');
+        } else if (windowClicked === 'rear' && tinted) {
+            index = brokenWindows.findIndex(element => element.window === 'rear_t');
+        } else {
+            index = brokenWindows.findIndex(element => element.window === windowClicked);
+        }   
+        // display popup if a window which can be tinted is clicked for the first time
+        if (!popupConfirm && (windowClicked === 'l_rear' || windowClicked === 'r_rear' || windowClicked === 'r_3' || windowClicked === 'l_3' || 
+            windowClicked === 'r_4' || windowClicked === 'l_4' || windowClicked === 'r_5' || windowClicked === 'l_5')) {
+            setPopup(true);
+            return; // don't allow back window selecting if popup is still active
+        }
         brokenWindows[index].broken = !brokenWindows[index].broken;
         setBrokenWindows(windows => {
             return windows.slice();
-        })
-        if (!popupConfirm && (windowClicked === 'rear' || windowClicked === 'r_3' || windowClicked === 'l_3' || 
-            windowClicked === 'r_4' || windowClicked === 'l_4' || windowClicked === 'r_5' || windowClicked === 'l_5')) {
-            setPopup(true);
-        }
+        })     
     }
 
     function handlePopup(answer) {
@@ -52,6 +98,11 @@ function VAN_Tailgater() {
     function tintedButtonHandle() {
         setTinted(!tinted);
         setPopupConfirm(true);
+        // reset all windows to not broken to avoid issues
+        for (let i = 0; i < brokenWindows.length; i++) {
+            brokenWindows[i].broken = false;            
+        }
+        setBrokenWindows(brokenWindows.slice());
     }
 
     // necessary to maintain proper image map scaling
@@ -94,6 +145,15 @@ function VAN_Tailgater() {
                 {/* display either car with tinted windows or normal */}
                 {tinted && <img className="image" src={vanTailgaterTinted} alt="" />}
                 {!tinted && <img className="image" src={vanTailgater} alt="" />}
+
+                {/* broken glass displays */}
+                {brokenWindows.filter(element => element.broken === true).map(element => 
+                    <img 
+                        key={element.window} 
+                        // image scaling wonky so windows need different css classes
+                        className='bg3' 
+                        src={element.source} alt="" />
+                )}
 
                 {/* transparent layer on top of all car-related images to maintain image map */}
                 <img className="selection-layer" src={vanTailgater} alt="" usemap="#image-map" />
