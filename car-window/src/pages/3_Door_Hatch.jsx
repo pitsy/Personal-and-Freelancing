@@ -117,6 +117,7 @@ function Three_Door_Hatch() {
                 <div className='button-container'>
                     <button onClick={tintedButtonHandle}>Toggle tinted windows</button>
                 </div>
+                
                 {/* display either car with tinted windows or normal */}
                 {tinted && <img className="image" src={threeDoorTinted} alt="" />}
                 {!tinted && <img className="image" src={threeDoor} alt="" />}

@@ -12,7 +12,7 @@
   z-index: 3;
 }
 
-.broken-glass, .broken-glass2, .bg3, .bg4 {
+.broken-glass, .bg3 {
   position: absolute;
   left: 0;
   right: 0;
@@ -31,10 +31,12 @@
   transform: scaleX(0.955) scaleY(0.955) translateY(-2.43%) translateX(0.01%);
 }
 
+/* image map class */
 area:hover {
   cursor: pointer;
 }
 
+/* transparent layer for image map */
 .selection-layer {
   position: absolute;
   left: 0;

@@ -6,7 +6,7 @@ import square from '../icons/square.png';
 export default function SingleTile({ tile, tileClick }) {
 
     function handleClick() {
-        tileClick(tile);
+        tileClick(tile);  
     }
 
     return (
